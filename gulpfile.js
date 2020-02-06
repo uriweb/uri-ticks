@@ -77,7 +77,7 @@ gulp.task('version', version);
 
 function version(done) {
 
-	gulp.src('./uri-plugin-template.php')
+	gulp.src('./uri-ticks.php')
 		.pipe(replace({
 			patterns: [{
 				match: /Version:\s([^\n\r]*)/,

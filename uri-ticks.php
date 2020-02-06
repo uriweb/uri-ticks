@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: URI Plugin Template
+ * Plugin Name: URI Ticks
  * Plugin URI: http://www.uri.edu
- * Description: A template for plugins
+ * Description: Creates custom posts, fields, and interaction for URI Tick Encounter data
  * Version: 0.1.0
  * Author: URI Web Communications
  * Author URI: https://today.uri.edu/
  *
  * @author: Brandon Fuller <bjcfuller@uri.edu>
- * @package uri-plugin-template
+ * @package uri-ticks
  */
 
 // Block direct requests
