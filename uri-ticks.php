@@ -16,16 +16,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+define( 'URI_TICKS_DIR_PATH', plugin_dir_path( __FILE__ ) );
+
 /**
  * Include css and js
  */
-function uri_plugin_template_enqueues() {
+function uri_ticks_enqueues() {
 
-	wp_register_style( 'uri-plugin-template-css', plugins_url( '/css/style.built.css', __FILE__ ) );
-	wp_enqueue_style( 'uri-plugin-template-css' );
+	wp_register_style( 'uri-ticks-css', plugins_url( '/css/style.built.css', __FILE__ ) );
+	wp_enqueue_style( 'uri-ticks-css' );
 
-	wp_register_script( 'uri-plugin-template-js', plugins_url( '/js/script.built.js', __FILE__ ) );
-	wp_enqueue_script( 'uri-plugin-template-js' );
+	wp_register_script( 'uri-ticks-js', plugins_url( '/js/script.built.js', __FILE__ ) );
+	wp_enqueue_script( 'uri-ticks-js' );
 
 }
-add_action( 'wp_enqueue_scripts', 'uri_plugin_template_enqueues' );
+add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
+
+
+/**
+ * Custom fields
+ */
+include( URI_TICKS_DIR_PATH . '/inc/custom-fields.php' );
