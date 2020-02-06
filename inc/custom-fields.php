@@ -63,7 +63,7 @@ function uri_ticks_create_disease_post_type() {
 		'has_archive' => true,
 		'exclude_from_search' => false,
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
-		'taxonomies' => array( 'post_tag', 'category' ),
+		'taxonomies' => array( 'vector' ),
 		'labels' => array(
 			'name' => __( 'Diseases', 'uri' ),
 			'singular_name' => __( 'Disease', 'uri' ),

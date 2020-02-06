@@ -37,3 +37,8 @@ add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
  * Custom fields
  */
 include( URI_TICKS_DIR_PATH . '/inc/custom-fields.php' );
+
+/**
+ * Custom taxonomy
+ */
+include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
