@@ -22,6 +22,7 @@ function uri_ticks_create_tick_post_type() {
 		'query_var' => true,
 		'has_archive' => true,
 		'exclude_from_search' => false,
+		'show_in_rest' => true,
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
 		'taxonomies' => array( 'post_tag', 'category' ),
 		'labels' => array(
@@ -63,6 +64,7 @@ function uri_ticks_create_disease_post_type() {
 		'query_var' => true,
 		'has_archive' => true,
 		'exclude_from_search' => false,
+		'show_in_rest' => true,
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
 		'taxonomies' => array( 'vector' ),
 		'labels' => array(
