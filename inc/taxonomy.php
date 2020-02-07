@@ -22,6 +22,7 @@ function uri_ticks_vector_taxonomy() {
 		'show_admin_column' => true,
 		'query_var' => true,
 		'rewrite' => false,
+		'show_in_rest' => true,
 		'singular_label' => 'Vector',
 		'labels' => array(
 			'add_new_item' => __( 'Add New Vector' ),
