@@ -18,7 +18,7 @@ function uri_ticks_create_tick_post_type() {
 		'show_in_menu' => true,
 		'capability_type' => 'post',
 		'hierarchical' => true,
-		'rewrite' => array( 'slug' => 'ticks' ),
+		'rewrite' => array( 'slug' => 'species' ),
 		'query_var' => true,
 		'has_archive' => true,
 		'exclude_from_search' => false,
