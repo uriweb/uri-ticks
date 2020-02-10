@@ -20,7 +20,7 @@ function uri_ticks_disease_taxonomy() {
 		'label' => 'Diseases',
 		'show_ui' => true,
 		'show_in_quick_edit' => false,
-		'show_admin_column' => true,
+		'show_admin_column' => false,
 		'query_var' => true,
 		'rewrite' => false,
 		'show_in_rest' => false,
