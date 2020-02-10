@@ -27,6 +27,10 @@ env:
     # @link https://github.com/WordPress/WordPress
     - WP_VERSION=master WP_MULTISITE=1
 
+# Start services
+services:
+    - mysql
+
 # Disable XDebug
 before_install:
     - phpenv config-rm xdebug.ini
@@ -47,9 +51,9 @@ before_script:
     - cd $WP_DEVELOP_DIR
     - echo $WP_DEVELOP_DIR
     - cp wp-tests-config-sample.php wp-tests-config.php
-    - sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-tests-config.php
-    - sed -i "s/yourusernamehere/root/" wp-tests-config.php
-    - sed -i "s/yourpasswordhere//" wp-tests-config.php
+    - sed -i "s/travis_wp_db/wordpress_test/" wp-tests-config.php
+    - sed -i "s/travis_user/root/" wp-tests-config.php
+    - sed -i "s/travis_pw//" wp-tests-config.php
     # Create WordPress database.
     - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
     # Install CodeSniffer for WordPress Coding Standards checks.
