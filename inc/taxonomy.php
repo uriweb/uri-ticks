@@ -6,66 +6,34 @@
  */
 
  /**
-  * Define the vector taxonomy for disease post types
+  * Define the disease taxonomy for tick post types
   */
-function uri_ticks_vector_taxonomy() {
+function uri_ticks_disease_taxonomy() {
 
 	register_taxonomy(
-	'vector',
+	'disease',
 	array(
-		0 => 'disease',
+		0 => 'tick',
 	),
 	array(
 		'hierarchical' => true,
-		'label' => 'Vectors',
+		'label' => 'Diseases',
 		'show_ui' => true,
+		'show_in_quick_edit' => false,
 		'show_admin_column' => true,
 		'query_var' => true,
 		'rewrite' => false,
-		'show_in_rest' => true,
-		'singular_label' => 'Vector',
+		'show_in_rest' => false,
+		'singular_label' => 'Disease',
 		'labels' => array(
-			'add_new_item' => __( 'Add New Vector' ),
-			'update_item' => __( 'Update Vector' ),
-			'view_item' => __( 'View Vector' ),
-			'edit_item' => __( 'Edit Vector' ),
-			'all_item' => __( 'All Vectors' ),
+			'add_new_item' => __( 'Add New Disease' ),
+			'update_item' => __( 'Update Disease' ),
+			'view_item' => __( 'View Disease' ),
+			'edit_item' => __( 'Edit Disease' ),
+			'all_item' => __( 'All Diseases' ),
 		),
 	)
 	);
 
 }
-add_action( 'init', 'uri_ticks_vector_taxonomy' );
-
-
-/**
- * Define the region taxonomy for disease post types
- */
-function uri_ticks_region_taxonomy() {
-
-	register_taxonomy(
-	'region',
-	array(
-		0 => 'disease',
-	),
-	array(
-		'hierarchical' => true,
-		'label' => 'Regions',
-		'show_ui' => true,
-		'show_admin_column' => true,
-		'query_var' => true,
-		'rewrite' => false,
-		'show_in_rest' => true,
-		'singular_label' => 'Region',
-		'labels' => array(
-			'add_new_item' => __( 'Add New Region' ),
-			'update_item' => __( 'Update Region' ),
-			'view_item' => __( 'View Region' ),
-			'edit_item' => __( 'Edit Region' ),
-			'all_item' => __( 'All Regions' ),
-		),
-	)
-	);
-
-}
-add_action( 'init', 'uri_ticks_region_taxonomy' );
+add_action( 'init', 'uri_ticks_disease_taxonomy' );
