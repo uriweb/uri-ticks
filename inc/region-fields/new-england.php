@@ -17,7 +17,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				 'label' => 'Abundance',
 				 'name' => 'new_england_abundance',
 				 'type' => 'number',
-				 'instructions' => 'Assign a numerical abundance or leave blank if no presence',
+				 'instructions' => 'Assign a numerical abundance or leave blank if no presence. Do not use on life stage posts.',
 				 'required' => 0,
 				 'conditional_logic' => 0,
 				 'wrapper' => array(
@@ -38,7 +38,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				 'label' => 'Diseases',
 				 'name' => 'new_england_diseases',
 				 'type' => 'taxonomy',
-				 'instructions' => 'Assign diseases carried by this life stage',
+				 'instructions' => 'Assign diseases carried by this life stage. Do not use on species posts.',
 				 'required' => 0,
 				 'conditional_logic' => 0,
 				 'wrapper' => array(
@@ -60,7 +60,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				 'label' => 'Activity',
 				 'name' => 'new_england_activity',
 				 'type' => 'group',
-				 'instructions' => 'Assign a numerical activity level for each month or leave blank if no activity',
+				 'instructions' => 'Assign a numerical activity level for each month or leave blank if no activity. Do not use on species posts.',
 				 'required' => 0,
 				 'conditional_logic' => 0,
 				 'wrapper' => array(
