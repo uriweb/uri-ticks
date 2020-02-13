@@ -5,12 +5,12 @@
  * @package uri-ticks
  */
 
- /**
-  * The shortcode
-  *
-  * @param arr $atts the attributes.
-  * @param str $content the content.
-  */
+/**
+ * The shortcode
+ *
+ * @param arr $atts the attributes.
+ * @param str $content the content.
+ */
 function uri_ticks_shortcode_get_ticks( $atts, $content = null ) {
 
 	// Attributes.
@@ -27,6 +27,11 @@ function uri_ticks_shortcode_get_ticks( $atts, $content = null ) {
 add_shortcode( 'uri-get-ticks', 'uri_ticks_shortcode_get_ticks' );
 
 
+/**
+ * The query
+ *
+ * @param arr $atts the attributes.
+ */
 function uri_ticks_query_ticks( $atts ) {
 
 	$args = array(
