@@ -16,7 +16,7 @@ function uri_ticks_settings_init() {
 		'uri_ticks',
 		'uri_ticks_activity_default_min',
 		array(
-			// 'sanitize_callback' => 'uri_ticks_activity_default_max_validate',
+			'sanitize_callback' => 'uri_ticks_activity_validate_integer',
 		)
 	);
 
@@ -24,7 +24,7 @@ function uri_ticks_settings_init() {
 		'uri_ticks',
 		'uri_ticks_activity_default_max',
 		array(
-			// 'sanitize_callback' => 'uri_ticks_activity_default_max_validate',
+			'sanitize_callback' => 'uri_ticks_activity_validate_integer',
 		)
 	);
 
@@ -37,7 +37,7 @@ function uri_ticks_settings_init() {
 
 	add_settings_field(
 		'uri_ticks_activity_defaults_field_min', // id: as of WP 4.6 this value is used only internally
-		__( 'Min', 'uri' ), // title
+		__( 'Min Activity Value', 'uri' ), // title
 		'uri_ticks_activity_defaults_field_min_callback', // callback
 		'uri_ticks', // page
 		'uri_ticks_activity_defaults_section', // section
@@ -49,7 +49,7 @@ function uri_ticks_settings_init() {
 
 	add_settings_field(
 		'uri_ticks_activity_defaults_field_max', // id: as of WP 4.6 this value is used only internally
-		__( 'Max', 'uri' ), // title
+		__( 'Max Activity Value', 'uri' ), // title
 		'uri_ticks_activity_defaults_field_max_callback', // callback
 		'uri_ticks', // page
 		'uri_ticks_activity_defaults_section', // section
@@ -68,7 +68,7 @@ add_action( 'admin_init', 'uri_ticks_settings_init' );
  * @param arr $args has the following keys defined: title, id, callback.
  */
 function uri_ticks_activity_defaults_section_callback( $args ) {
-	$intro = 'Settings for the activity graph';
+	$intro = 'Default settings for the tick activity graph shortcode. Options set here will affect all graphs, but can be overridden on a per-graph basis using shortcode properties.';
 	echo '<p id="' . esc_attr( $args['id'] ) . '">' .
 		esc_html_e( $intro, 'uri' ) .
 		'</p>';
@@ -92,7 +92,7 @@ function uri_ticks_activity_defaults_field_min_callback( $args ) {
 		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_min" id="uri-ticks-field-min" value="<?php print ( $setting !== false ) ? esc_attr( $setting ) : ''; ?>">
 		<p class="url-description">
 			<?php
-				esc_html_e( 'Enter the min', 'uri' );
+				esc_html_e( 'The Y-axis minimum value for activity (default is 0)', 'uri' );
 			?>
 		</p>
 	<?php
@@ -116,7 +116,7 @@ function uri_ticks_activity_defaults_field_max_callback( $args ) {
 		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_max" id="uri-ticks-field-max" value="<?php print ( $setting !== false ) ? esc_attr( $setting ) : ''; ?>">
 		<p class="url-description">
 			<?php
-				esc_html_e( 'Enter the max', 'uri' );
+				esc_html_e( 'The Y-axis maximum value for activity (default is dataset max)', 'uri' );
 			?>
 		</p>
 	<?php
@@ -164,4 +164,20 @@ function uri_ticks_settings_page_html() {
 			</form>
 		</div>
 	<?php
+}
+
+/**
+ * Sanitizes an integer
+ *
+ * @param str $url is the URL to test.
+ * @return mixed: str on success; NULL on failure
+ */
+function uri_ticks_activity_validate_integer( $value ) {
+	$out = filter_var( $value, FILTER_VALIDATE_FLOAT );
+	if ( ! empty( $value ) && false === $out ) {
+		// returning NULL triggers the WP UI to show that the value is unacceptable.
+		return null;
+	} else {
+		return $out;
+	}
 }
