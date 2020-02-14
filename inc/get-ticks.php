@@ -47,17 +47,30 @@ function uri_ticks_query_ticks( $atts ) {
 
 	// The Loop
 	if ( $the_query->have_posts() ) {
-		$output = '<ul>';
-		while ( $the_query->have_posts() ) {
-			$the_query->the_post();
-			$output .= '<li>' . get_the_title() . '</li>';
-		}
-		$output .= '</ul>';
+		$output = uri_ticks_query_build_output( $the_query );
 	} else {
 		// no posts found
 	}
 	/* Restore original Post Data */
 	wp_reset_postdata();
+
+	return $output;
+
+}
+
+/**
+ * Build the output
+ *
+ * @param obj $q the query.
+ */
+function uri_ticks_query_build_output( $q ) {
+
+	$output = '<ul>';
+	while ( $q->have_posts() ) {
+		$q->the_post();
+		$output .= '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
+	}
+	$output .= '</ul>';
 
 	return $output;
 
