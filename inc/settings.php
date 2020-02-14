@@ -6,7 +6,7 @@
  */
 
 /**
- * custom option and settings
+ * Custom option and settings
  *
  * @see https://developer.wordpress.org/plugins/settings/using-settings-api/
  */
@@ -68,10 +68,7 @@ add_action( 'admin_init', 'uri_ticks_settings_init' );
  * @param arr $args has the following keys defined: title, id, callback.
  */
 function uri_ticks_activity_defaults_section_callback( $args ) {
-	$intro = 'Default settings for the tick activity graph shortcode. Options set here will affect all graphs, but can be overridden on a per-graph basis using shortcode properties.';
-	echo '<p id="' . esc_attr( $args['id'] ) . '">' .
-		esc_html_e( $intro, 'uri' ) .
-		'</p>';
+	echo '<p id="' . esc_attr( $args['id'] ) . '">' . esc_html_e( 'Default settings for the tick activity graph shortcode. Options set here will affect all graphs, but can be overridden on a per-graph basis using shortcode properties.', 'uri' ) . '</p>';
 }
 
 /**
@@ -79,22 +76,15 @@ function uri_ticks_activity_defaults_section_callback( $args ) {
  * outputs the field
  *
  * @see add_settings_field()
- * @param $args
- *  wordpress has magic interaction with the following keys: label_for, class.
- *  the "label_for" key value is used for the "for" attribute of the <label>.
- *  the "class" key value is used for the "class" attribute of the <tr> containing the field.
+ * @param arr $args The shortcode arguments.
  */
 function uri_ticks_activity_defaults_field_min_callback( $args ) {
 	// get the value of the setting we've registered with register_setting()
 	$setting = get_option( 'uri_ticks_activity_default_min' );
 	// output the field
 	?>
-		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_min" id="uri-ticks-field-min" value="<?php print ( $setting !== false ) ? esc_attr( $setting ) : ''; ?>">
-		<p class="url-description">
-			<?php
-				esc_html_e( 'The Y-axis minimum value for activity (default is 0)', 'uri' );
-			?>
-		</p>
+		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_min" id="uri-ticks-field-min" value="<?php print ( false !== $setting ) ? esc_attr( $setting ) : ''; ?>">
+		<p class="url-description"><?php esc_html_e( 'The Y-axis minimum value for activity (default is 0)', 'uri' ); ?></p>
 	<?php
 }
 
@@ -103,22 +93,15 @@ function uri_ticks_activity_defaults_field_min_callback( $args ) {
  * outputs the field
  *
  * @see add_settings_field()
- * @param $args
- *  wordpress has magic interaction with the following keys: label_for, class.
- *  the "label_for" key value is used for the "for" attribute of the <label>.
- *  the "class" key value is used for the "class" attribute of the <tr> containing the field.
+ * @param arr $args The shortcode arguments.
  */
 function uri_ticks_activity_defaults_field_max_callback( $args ) {
 	// get the value of the setting we've registered with register_setting()
 	$setting = get_option( 'uri_ticks_activity_default_max' );
 	// output the field
 	?>
-		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_max" id="uri-ticks-field-max" value="<?php print ( $setting !== false ) ? esc_attr( $setting ) : ''; ?>">
-		<p class="url-description">
-			<?php
-				esc_html_e( 'The Y-axis maximum value for activity (default is dataset max)', 'uri' );
-			?>
-		</p>
+		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_max" id="uri-ticks-field-max" value="<?php print ( false !== $setting ) ? esc_attr( $setting ) : ''; ?>">
+		<p class="url-description"><?php esc_html_e( 'The Y-axis maximum value for activity (default is dataset max)', 'uri' ); ?></p>
 	<?php
 }
 
@@ -139,7 +122,7 @@ function uri_ticks_settings_page() {
 add_action( 'admin_menu', 'uri_ticks_settings_page' );
 
 /**
- * menu callback.
+ * Menu callback.
  * renders the HTML on the settings page
  */
 function uri_ticks_settings_page_html() {
@@ -169,7 +152,7 @@ function uri_ticks_settings_page_html() {
 /**
  * Sanitizes an integer
  *
- * @param str $url is the URL to test.
+ * @param str $value is the URL to test.
  * @return mixed: str on success; NULL on failure
  */
 function uri_ticks_activity_validate_integer( $value ) {
