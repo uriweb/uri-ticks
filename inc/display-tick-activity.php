@@ -24,6 +24,19 @@ function uri_ticks_shortcode_display_tick_activity( $atts, $content = null ) {
 	$atts
 	);
 
+	return uri_ticks_activity_graph_output( $atts );
+
+}
+add_shortcode( 'uri-display-tick-activity', 'uri_ticks_shortcode_display_tick_activity' );
+
+
+/**
+ * Build the output
+ *
+ * @param arr $atts the attributes.
+ */
+function uri_ticks_activity_graph_output( $atts ) {
+
 	$activity = get_field( $atts['region'] . '_activity' );
 
 	$min = 0;
@@ -62,7 +75,9 @@ function uri_ticks_shortcode_display_tick_activity( $atts, $content = null ) {
 	$output .= '</div>';
 
 	foreach ( $activity as $m => $v ) {
+
 		$p = max( 0, ( $v - $min ) / ( $max - $min ) * 100 );
+
 		$output .= '<div class="uri-ticks-activity-column">';
 
 		$output .= '<div class="uri-ticks-activity-bar-wrapper">';
@@ -70,7 +85,9 @@ function uri_ticks_shortcode_display_tick_activity( $atts, $content = null ) {
 		$output .= '</div>';
 
 		$output .= '<div class="uri-ticks-activity-label">' . ucfirst( substr( $m, 0, 3 ) ) . '</div>';
+
 		$output .= '</div>';
+
 	}
 
 	$output .= '</div>';
@@ -79,4 +96,3 @@ function uri_ticks_shortcode_display_tick_activity( $atts, $content = null ) {
 	return $output;
 
 }
-add_shortcode( 'uri-display-tick-activity', 'uri_ticks_shortcode_display_tick_activity' );
