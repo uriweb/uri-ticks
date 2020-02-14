@@ -17,7 +17,7 @@
 
   display: grid;
   grid-template-columns: repeat( 13, 1fr );
-  grid-template-rows: 300px;
+  grid-template-rows: 150px;
   grid-column-gap: 1%;
   align-items: end;
 
@@ -31,19 +31,19 @@
     align-self: start;
     height: 90%;
     position: relative;
-    font-size: .9rem;
-    border-right: 2px solid #999;
+    font-size: .5rem;
+    border-right: 1px solid #555;
 
     .uri-ticks-activity-legend-upper {
       position: absolute;
       top: 0;
-      right: 20%;
+      right: .5rem;
     }
 
     .uri-ticks-activity-legend-lower {
       position: absolute;
       bottom: 0;
-      right: 20%;
+      right: .5rem;
     }
 
   }
@@ -51,6 +51,8 @@
   .uri-ticks-activity-bar-wrapper {
     height: 90%;
     background: #bbb;
+    border-bottom: 1px solid #555;
+    box-sizing: border-box;
   }
 
   .uri-ticks-activity-bar {
@@ -58,10 +60,71 @@
   }
 
   .uri-ticks-activity-label {
-    height: 10%;
-    padding: 5%;
+    position: relative;
+    top: .7rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: .65rem;
+    transform: rotate(-90deg);
+  }
+
+}
+
+@media screen and (min-width:600px) {
+
+  .uri-ticks-activity-graph {
+
+    grid-template-rows: 200px;
+
+    .uri-ticks-activity-legend {
+
+      font-size: .8rem;
+
+      .uri-ticks-activity-legend-upper {
+        right: 30%;
+      }
+
+      .uri-ticks-activity-legend-lower {
+        right: 30%;
+      }
+
+    }
+
+    .uri-ticks-activity-label {
+      height: 10%;
+      top: 0;
+      padding: .8rem 0 0;
+      font-size: .8rem;
+      transform: rotate(0);
+    }
+
+  }
+
+}
+
+@media screen and (min-width:800px) {
+
+  .uri-ticks-activity-graph {
+
+    grid-template-rows: 300px;
+
+    .uri-ticks-activity-legend {
+
+      font-size: .9rem;
+
+      .uri-ticks-activity-legend-upper {
+        right: 20%;
+      }
+
+      .uri-ticks-activity-legend-lower {
+        right: 20%;
+      }
+
+    }
+
+    .uri-ticks-activity-label {
+      font-size: 1rem;
+    }
+
   }
 
 }
