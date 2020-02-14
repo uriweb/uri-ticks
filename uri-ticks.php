@@ -34,6 +34,11 @@ add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
 
 
 /**
+ * Settings
+ */
+include( URI_TICKS_DIR_PATH . '/inc/settings.php' );
+
+/**
  * Custom fields
  */
 include( URI_TICKS_DIR_PATH . '/inc/post-types.php' );
@@ -47,3 +52,8 @@ include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
  * Get Ticks shortcode
  */
 include( URI_TICKS_DIR_PATH . '/inc/get-ticks.php' );
+
+/**
+ * Display Tick Activity shortcode
+ */
+include( URI_TICKS_DIR_PATH . '/inc/display-tick-activity.php' );
