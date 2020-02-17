@@ -1,0 +1,28 @@
+/* ======= MAP ======= */
+
+#uri-tick-map {
+
+  path {
+    stroke: #fff;
+    stroke-width: 0.5px;
+    fill: #ddd;
+    transition: fill .1s ease-in-out;
+  }
+
+  .region-group {
+
+    g.active path {
+      fill: #FF615D;
+    }
+
+    g:not(.active):hover path,
+    g:not(.active):focus path {
+      fill: #999;
+      cursor: pointer;
+    }
+
+  }
+
+
+
+}
