@@ -16,9 +16,15 @@
   }
 
   .species-container {
+
     grid-area: species;
     background: #eee;
     padding: 1rem;
+
+    .species-region {
+      display: none;
+    }
+
   }
 
   .time-slider {

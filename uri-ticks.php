@@ -32,6 +32,44 @@ function uri_ticks_enqueues() {
 }
 add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
 
+/**
+ * Return an array of region keys
+ */
+function uri_ticks_get_the_regions() {
+	return array(
+		'en-central',
+		'es-central',
+		'mid-atlantic',
+		'mountain',
+		'new-england',
+		'pacific',
+		'south-atlantic',
+		'wn-central',
+		'ws-central',
+	);
+}
+
+
+/**
+ * Return an array of months
+ */
+function uri_ticks_get_the_months() {
+	return array(
+		'january',
+		'february',
+		'march',
+		'april',
+		'may',
+		'june',
+		'july',
+		'august',
+		'september',
+		'october',
+		'november',
+		'december',
+	);
+}
+
 
 /**
  * Settings
