@@ -45,6 +45,7 @@ function uri_ticks_map_build_output( $atts ) {
 		<div class="species-container">
 			<h2>Species</h2>
 			<div class="species-list">
+				<p class="instruction">Select a region</p>
 				<?php
 
 				$regions = uri_ticks_get_the_regions();
@@ -59,7 +60,18 @@ function uri_ticks_map_build_output( $atts ) {
 			</div>
 		</div>
 		<div class="time-slider">
-			<p>Time slider</p>
+			<h2>Time slider</h2>
+			<div class="time-slider-container">
+				<input type="range" min="1" max="12" value="<?php echo date( 'n' ); ?>" class="slider" id="uri-tick-map-timeframe">
+				<div class="time-slider-labels">
+					<?php
+					$months = uri_ticks_get_the_months();
+					foreach ( $months as $m ) :
+						?>
+						<div><?php echo ucfirst( substr( $m, 0, 3 ) ); ?></div>
+					<?php endforeach; ?>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -99,18 +111,20 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 	// The Query
 	$the_query = new WP_Query( $args );
 
+	$output = '<ul class="activity-' . $m . '">';
+	$output .= '<h3 class="title">' . $r . ', ' . $m . '</h3>';
+
 	// The Loop
 	if ( $the_query->have_posts() ) {
-		$output = '<ul class="activity-' . $m . '">';
-		$output .= '<li class="title">' . $m . '</li>';
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
 			$output .= '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
 		}
-		$output .= '</ul>';
 	} else {
-		$output = 'no posts';
+		$output .= '<li>No activity</li>';
 	}
+
+	$output .= '</ul>';
 
 	/* Restore original Post Data */
 	wp_reset_postdata();

@@ -15,8 +15,11 @@
   function init() {
 
     data = {
+			wrapper: document.getElementById( 'uri-tick-map-wrapper' ),
       map: document.getElementById( 'uri-tick-map' ),
       regions: {},
+			slider: document.getElementById( 'uri-tick-map-timeframe' ),
+			species: {},
     }
 
     const regions = data.map.querySelectorAll( '.region-group g' );
@@ -26,6 +29,28 @@
       data.regions[r.getAttribute( 'id' ).replace( 'map-region-', '')] = r;
     }
 
+		const species = data.wrapper.querySelectorAll( '.species-region' );
+		for ( let i = 0; i < species.length; i++ ) {
+
+			const s = species[i];
+			const activity = s.querySelectorAll( 'ul' );
+
+			const alist = {};
+			for ( let j = 0; j < activity.length; j++ ) {
+				const a = activity[j];
+				alist[a.getAttribute( 'class' ).replace( 'activity-', '' )] = a;
+			}
+
+			data.species[s.getAttribute( 'id' ).replace( 'species-region-', '' )] = {
+				el: s,
+				activity: alist,
+			};
+
+    }
+
+		data.slider.addEventListener( 'change', handleTimeframeChange, false );
+		handleTimeframeChange();
+
   }
 
 	function setupRegion( r ) {
@@ -33,15 +58,14 @@
 	}
 
 	function handleRegionClick( r ) {
+		const active = r.getAttribute( 'id' ).replace( 'map-region-', '' );
+		data.wrapper.setAttribute( 'data-active-region', active );
+	}
 
-		const className = 'active';
-
-		for ( const key in data.regions ) {
-			data.regions[key].classList.remove( className );
-		}
-
-		r.classList.add( className );
-
+	function handleTimeframeChange() {
+		const value = data.slider.value - 1;
+		const months = [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ];
+		data.wrapper.setAttribute( 'data-active-month', months[value] );
 	}
 
 })();
