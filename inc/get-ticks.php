@@ -48,9 +48,8 @@ function uri_ticks_query_ticks( $atts ) {
 	// The Loop
 	if ( $the_query->have_posts() ) {
 		$output = uri_ticks_query_build_output( $the_query );
-	} else {
-		// no posts found
 	}
+
 	/* Restore original Post Data */
 	wp_reset_postdata();
 
