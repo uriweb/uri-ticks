@@ -38,7 +38,7 @@ function uri_ticks_map_build_output( $atts ) {
 
 	?>
 
-	<div id="uri-tick-map-wrapper" data-active-region="new-england" data-active-month="<?php echo strtolower( date( 'F' ) ); ?>">
+	<div id="uri-tick-map-wrapper" data-active-region="new-england" data-active-month="<?php echo strtolower( gmdate( 'F' ) ); ?>">
 		<div class="map-container">
 			<?php include( URI_TICKS_DIR_PATH . '/i/us_states.svg' ); ?>
 		</div>
@@ -65,7 +65,7 @@ function uri_ticks_map_build_output( $atts ) {
 		</div>
 		<div class="time-slider">
 			<div class="time-slider-container">
-				<input type="range" min="1" max="12" value="<?php echo date( 'n' ); ?>" class="slider" id="uri-tick-map-timeframe">
+				<input type="range" min="1" max="12" value="<?php echo gmdate( 'n' ); ?>" class="slider" id="uri-tick-map-timeframe">
 				<div class="time-slider-labels">
 					<?php
 					$months = uri_ticks_get_the_months();
