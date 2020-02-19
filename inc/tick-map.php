@@ -86,6 +86,9 @@ function uri_ticks_map_build_output( $atts ) {
 
 /**
  * Get tick posts by region
+ *
+ * @param arr $atts the attributes.
+ * @param str $r the region key.
  */
 function uri_ticks_map_get_tick_posts( $atts, $r ) {
 
@@ -100,6 +103,13 @@ function uri_ticks_map_get_tick_posts( $atts, $r ) {
 
 }
 
+/**
+ * Get tick posts by month
+ *
+ * @param arr $atts the attributes.
+ * @param str $r the region key.
+ * @param str $m the month key.
+ */
 function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 
 	$meta_key = str_replace( '-', '_', $r ) . '_activity_' . $m;
@@ -148,6 +158,11 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 
 }
 
+/**
+ * Return category or tag names
+ *
+ * @param str $type specify 'cats' or 'tags'.
+ */
 function uri_ticks_map_return_cat_names( $type = 'cats' ) {
 
 	switch ( $type ) {
