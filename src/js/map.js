@@ -20,8 +20,10 @@
       regions: {},
 			slider: document.getElementById( 'uri-tick-map-timeframe' ),
 			species: {},
+			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ],
     }
 
+		data.wrapper.setAttribute( 'data-active-region', '' );
     const regions = data.map.querySelectorAll( '.region-group g' );
     for ( let i = 0; i < regions.length; i++ ) {
 			const r = regions[i];
@@ -48,8 +50,16 @@
 
     }
 
-		data.slider.addEventListener( 'change', handleTimeframeChange, false );
-		handleTimeframeChange();
+		const labels = data.wrapper.querySelectorAll( '.time-slider-label' );
+		for ( let i = 0; i < labels.length; i++ ) {
+			setupLabel( labels[i] );
+		}
+
+		data.slider.addEventListener( 'change', function() {
+			const v = data.slider.value;
+			changeTimeframe( v );
+		}, false );
+		changeTimeframe( data.slider.value );
 
   }
 
@@ -62,10 +72,18 @@
 		data.wrapper.setAttribute( 'data-active-region', active );
 	}
 
-	function handleTimeframeChange() {
-		const value = data.slider.value - 1;
-		const months = [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ];
-		data.wrapper.setAttribute( 'data-active-month', months[value] );
+	function setupLabel( l ) {
+		const n = l.getAttribute( 'data-label-name' );
+		const i = data.months.indexOf( n ) + 1;
+		l.addEventListener( 'click', function() {
+			data.slider.value = i;
+			changeTimeframe( i );
+		}, false );
+	}
+
+	function changeTimeframe( i ) {
+		const value = i * 1 - 1;
+		data.wrapper.setAttribute( 'data-active-month', data.months[value] );
 	}
 
 })();

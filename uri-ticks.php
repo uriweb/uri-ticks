@@ -33,19 +33,19 @@ function uri_ticks_enqueues() {
 add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
 
 /**
- * Return an array of region keys
+ * Return an array of regions
  */
 function uri_ticks_get_the_regions() {
 	return array(
-		'en-central',
-		'es-central',
-		'mid-atlantic',
-		'mountain',
-		'new-england',
-		'pacific',
-		'south-atlantic',
-		'wn-central',
-		'ws-central',
+		'en-central' => 'E/N Central',
+		'es-central' => 'E/S Central',
+		'mid-atlantic' => 'Mid Atlantic',
+		'mountain' => 'Mountain',
+		'new-england' => 'New England',
+		'pacific' => 'Pacific',
+		'south-atlantic' => 'South Atlantic',
+		'wn-central' => 'W/N Central',
+		'ws-central' => 'W/S Central',
 	);
 }
 
