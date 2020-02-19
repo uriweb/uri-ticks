@@ -34,6 +34,9 @@ add_shortcode( 'uri-tick-map', 'uri_ticks_shortcode_tick_map' );
  */
 function uri_ticks_map_build_output( $atts ) {
 
+	$regions = uri_ticks_get_the_regions();
+	$months = uri_ticks_get_the_months();
+
 	ob_start();
 
 	?>
@@ -43,32 +46,50 @@ function uri_ticks_map_build_output( $atts ) {
 			<?php include( URI_TICKS_DIR_PATH . '/i/us_states.svg' ); ?>
 		</div>
 		<div class="species-container">
-			<h2>Tick Activity</h2>
-			<div class="species-list">
-				<div class="results-label instruction-label">
-					<p>Select a region to begin searching for ticks, and adjust the time of year to see how tick activity changes.</p>
-					<p>Results will appear here.</p>
+			<div class="species-wrapper">
+				<h2>Tick Activity</h2>
+				<div class="species-menu">
+					<div class="species-menu-select-region">
+						<select>
+							<option>Select a region</option>
+							<?php foreach ( $regions as $r => $rname ) : ?>
+							<option value="<?php echo $r; ?>"><?php echo $rname; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="species-menu-select-month">
+						<select>
+							<option>Select a month</option>
+							<?php foreach ( $months as $m ) : ?>
+							<option value="<?php echo $m; ?>"><?php echo ucfirst( $m ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
-				<?php
+				<div class="species-list">
+					<div class="results-label instruction-label">
+						<p>Select a region to begin searching for ticks, and adjust the time of year to see how tick activity changes.</p>
+						<p>Results will appear here.</p>
+					</div>
+					<?php
+					foreach ( $regions as $r => $rname ) :
+						?>
 
-				$regions = uri_ticks_get_the_regions();
-				foreach ( $regions as $r => $rname ) :
-					?>
+					<div class="species-region" id="species-region-<?php echo $r; ?>">
+						<h3><?php echo $rname; ?></h3>
+						<?php echo uri_ticks_map_get_tick_posts( $atts, $r ); ?>
+					</div>
 
-				<div class="species-region" id="species-region-<?php echo $r; ?>">
-					<h3><?php echo $rname; ?></h3>
-					<?php echo uri_ticks_map_get_tick_posts( $atts, $r ); ?>
+					<?php endforeach; ?>
 				</div>
-
-				<?php endforeach; ?>
 			</div>
 		</div>
 		<div class="time-slider">
 			<div class="time-slider-container">
+				<label id="uri-tick-map-timeframe-label" for="uri-tick-map-timeframe">Month</label>
 				<input type="range" min="1" max="12" value="<?php echo gmdate( 'n' ); ?>" class="slider" id="uri-tick-map-timeframe">
 				<div class="time-slider-labels">
 					<?php
-					$months = uri_ticks_get_the_months();
 					foreach ( $months as $m ) :
 						?>
 						<div class="time-slider-label" data-label-name="<?php echo $m; ?>"><?php echo ucfirst( substr( $m, 0, 3 ) ); ?></div>
@@ -132,15 +153,21 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 	if ( $the_query->have_posts() ) {
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
+			$meta_val = get_field( $meta_key );
+			$option_max = get_option( 'uri_ticks_activity_default_max' );
+			$p = intval( $meta_val ) / intval( $option_max ) * 100;
 			$classes = '';
-			if ( strval( $atts['threshold'] ) == get_field( $meta_key ) ) {
+			if ( strval( $atts['threshold'] ) == $meta_val ) {
 				$classes = 'inactive';
 			}
-			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '">';
+			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '" data-activity-percent="' . $p . '">';
 			$output .= '<div class="species-image">' . get_the_post_thumbnail() . '</div>';
 			$output .= '<div class="species-meta">';
 			$output .= '<div class="species-category">' . implode( ', ', uri_ticks_map_return_cat_names() ) . '</div>';
 			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_map_return_cat_names( 'tags' ) ) . '</div>';
+			$output .= '<div class="species-activity-wrapper">';
+			$output .= '<div class="species-activity"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
+			$output .= '</div>';
 			$output .= '</div>';
 			$output .= '</a></li>';
 		}

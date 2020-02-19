@@ -15,12 +15,12 @@
   function init() {
 
     data = {
-			wrapper: document.getElementById( 'uri-tick-map-wrapper' ),
       map: document.getElementById( 'uri-tick-map' ),
+			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ],
       regions: {},
 			slider: document.getElementById( 'uri-tick-map-timeframe' ),
 			species: {},
-			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ],
+			wrapper: document.getElementById( 'uri-tick-map-wrapper' ),
     }
 
 		data.wrapper.setAttribute( 'data-active-region', '' );
@@ -55,6 +55,14 @@
 			setupLabel( labels[i] );
 		}
 
+		data.selectors = {
+			region: data.wrapper.querySelector( '.species-menu-select-region select' ),
+			month: data.wrapper.querySelector( '.species-menu-select-month select' ),
+		};
+
+		data.selectors.region.addEventListener( 'change', handleSelectRegion, false );
+		data.selectors.month.addEventListener( 'change', handleSelectMonth, false );
+
 		data.slider.addEventListener( 'change', function() {
 			const v = data.slider.value;
 			changeTimeframe( v );
@@ -70,6 +78,7 @@
 	function handleRegionClick( r ) {
 		const active = r.getAttribute( 'id' ).replace( 'map-region-', '' );
 		data.wrapper.setAttribute( 'data-active-region', active );
+		data.selectors.region.value = active;
 	}
 
 	function setupLabel( l ) {
@@ -84,6 +93,19 @@
 	function changeTimeframe( i ) {
 		const value = i * 1 - 1;
 		data.wrapper.setAttribute( 'data-active-month', data.months[value] );
+		data.selectors.month.value = data.months[value];
+	}
+
+	function handleSelectRegion() {
+		const r = data.selectors.region.value;
+		data.wrapper.setAttribute( 'data-active-region', r );
+	}
+
+	function handleSelectMonth() {
+		const m = data.selectors.month.value;
+		const i = data.months.indexOf( m ) + 1;
+		data.slider.value = i;
+		changeTimeframe( i );
 	}
 
 })();
