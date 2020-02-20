@@ -190,6 +190,14 @@ $regions:
             background: #fff;
           }
 
+          .species-diseases span {
+            color: #fff;
+          }
+
+          #uri-tick-biohazard path {
+            fill: #fff;
+          }
+
         }
 
         a.inactive {
@@ -205,8 +213,9 @@ $regions:
     }
 
     .species-meta {
+      position: relative;
       width: 75%;
-      padding: 4%;
+      padding: 4% 4% 4% 1%;
       font-family: "Hind", "Lato", "Arial", sans-serif;
       color: #333;
       box-sizing: border-box;
@@ -255,6 +264,49 @@ $regions:
       height: 100%;
       background: #FF615D;
       transition: background .1s ease-in-out;
+    }
+
+    .species-diseases {
+
+      position: absolute;
+      right: 5%;
+      top: .8rem;
+      //background: #eee;
+      //padding: 2px 4px 0;
+      border-radius: 3px;
+
+      &:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      span {
+        display: block;
+        float: left;
+        padding-right: .2rem;
+        font-size: .8rem;
+        line-height: 17px;
+        font-weight: 700;
+        color: #FF615D;
+        transition: color .1s ease-in-out;
+      }
+
+      #uri-tick-biohazard {
+
+        display: block;
+        float: left;
+        width: 12px;
+        height: auto;
+        padding-top: 2px;
+
+        path {
+          fill: #FF615D;
+          transition: fill .1s ease-in-out;
+        }
+
+      }
+
     }
 
   }

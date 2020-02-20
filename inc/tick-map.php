@@ -160,13 +160,14 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 			if ( strval( $atts['threshold'] ) == $meta_val ) {
 				$classes = 'inactive';
 			}
-			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '" data-activity-percent="' . $p . '">';
+			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '" data-activity-percent="' . $p . '" title="Learn more about this tick">';
 			$output .= '<div class="species-image">' . get_the_post_thumbnail() . '</div>';
 			$output .= '<div class="species-meta">';
+			$output .= uri_ticks_map_return_diseases( $r );
 			$output .= '<div class="species-category">' . implode( ', ', uri_ticks_map_return_cat_names() ) . '</div>';
 			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_map_return_cat_names( 'tags' ) ) . '</div>';
 			$output .= '<div class="species-activity-wrapper">';
-			$output .= '<div class="species-activity"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
+			$output .= '<div class="species-activity" title="Tick activity level: ' . $meta_val . '/' . $option_max . '"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
 			$output .= '</div>';
 			$output .= '</div>';
 			$output .= '</a></li>';
@@ -209,4 +210,25 @@ function uri_ticks_map_return_cat_names( $type = 'cats' ) {
 
 	return $names;
 
+}
+
+/**
+ * Return disease markup
+ *
+ * @param str $r the region key.
+ */
+function uri_ticks_map_return_diseases( $r ) {
+	$diseases = get_field( str_replace( '-', '_', $r ) . '_diseases' );
+	if ( $diseases ) {
+
+		$n = sizeof( $diseases );
+		$p = ( $n > 1 ) ? 's' : '';
+
+		$output = '<div class="species-diseases" title="This tick transmits ' . $n . ' disease' . $p . '">';
+		$output .= '<span>' . $n . '</span>';
+		$output .= file_get_contents( URI_TICKS_DIR_PATH . '/i/biohazard.svg' );
+		$output .= '</div>';
+
+		return $output;
+	}
 }
