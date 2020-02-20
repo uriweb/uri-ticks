@@ -14,13 +14,18 @@
 
   function init() {
 
+		const wrapper = document.getElementById( 'uri-tick-map-wrapper' );
+		if ( null === wrapper ) {
+			return false;
+		}
+
     data = {
       map: document.getElementById( 'uri-tick-map' ),
 			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ],
       regions: {},
 			slider: document.getElementById( 'uri-tick-map-timeframe' ),
 			species: {},
-			wrapper: document.getElementById( 'uri-tick-map-wrapper' ),
+			wrapper,
     }
 
 		data.wrapper.setAttribute( 'data-active-region', '' );
