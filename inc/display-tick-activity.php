@@ -42,19 +42,19 @@ function uri_ticks_activity_graph_output( $atts ) {
 	$min = 0;
 	$option_min = get_option( 'uri_ticks_activity_default_min' );
 	if ( ! empty( $option_min ) ) {
-		$min = $option_min;
+		$min = intval( $option_min );
 	}
 	if ( ! empty( $atts['min'] ) ) {
-		$min = $atts['min'];
+		$min = intval( $atts['min'] );
 	}
 
 	$max = max( $activity );
 	$option_max = get_option( 'uri_ticks_activity_default_max' );
 	if ( ! empty( $option_max ) ) {
-		$max = $option_max;
+		$max = intval( $option_max );
 	}
 	if ( ! empty( $atts['max'] ) ) {
-		$max = $atts['max'];
+		$max = intval( $atts['max'] );
 	}
 
 	$label_high = 'High';
@@ -65,7 +65,10 @@ function uri_ticks_activity_graph_output( $atts ) {
 	}
 
 	$output = '<div class="uri-ticks-activity">';
-	$output .= '<h1>' . $atts['title'] . '</h1>';
+
+	if ( ! empty( $atts['title'] ) ) {
+		$output .= '<h1>' . $atts['title'] . '</h1>';
+	}
 
 	$output .= '<div class="uri-ticks-activity-graph">';
 
@@ -76,7 +79,7 @@ function uri_ticks_activity_graph_output( $atts ) {
 
 	foreach ( $activity as $m => $v ) {
 
-		$p = max( 0, ( $v - $min ) / ( $max - $min ) * 100 );
+		$p = max( 0, ( intval( $v ) - $min ) / ( $max - $min ) * 100 );
 
 		$output .= '<div class="uri-ticks-activity-column">';
 
