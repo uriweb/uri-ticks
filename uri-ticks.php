@@ -92,11 +92,6 @@ include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
 include( URI_TICKS_DIR_PATH . '/inc/tick-map.php' );
 
 /**
- * Display Tick Activity shortcode
- */
-include( URI_TICKS_DIR_PATH . '/inc/display-tick-activity.php' );
-
-/**
  * Display Tick Diseases shortcode
  */
 include( URI_TICKS_DIR_PATH . '/inc/display-tick-phases.php' );

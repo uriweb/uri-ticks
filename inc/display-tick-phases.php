@@ -79,17 +79,16 @@ function uri_ticks_phase_output() {
 	$regions = uri_ticks_get_the_regions();
 
 	$output = '<h1>' . get_the_title() . '</h1>';
+	$output .= '<ul class="phase-regions-list">';
 
 	foreach ( $regions as $r => $rname ) {
 
-		$output .= '<div class="phase-region-' . $r . '">';
+		$output .= '<li class="phase-region-' . $r . '">';
 		$output .= '<h2>' . $rname . '</h2>';
 
 		$output .= '<div class="uri-tick-activity-wrapper">';
 		$output .= '<h3>Activity</h3>';
-		$output .= '<div class="activity-graph">';
-		$output .= do_shortcode( '[uri-display-tick-activity title="" region="' . str_replace( '-', '_', $r ) . '"]' );
-		$output .= '</div>';
+		$output .= uri_ticks_activity_graph_output( $r );
 		$output .= '</div>';
 
 		$output .= '<div class="uri-tick-diseases-wrapper">';
@@ -99,9 +98,11 @@ function uri_ticks_phase_output() {
 		$output .= '</div>';
 		$output .= '</div>';
 
-		$output .= '</div>';
+		$output .= '</li>';
 
 	}
+
+	$output .= '</ul>';
 
 	return $output;
 
@@ -128,6 +129,58 @@ function uri_ticks_diseases_output( $r ) {
 	}
 
 	$output .= '</ul>';
+
+	return $output;
+
+}
+
+/**
+ * Build the graph output
+ *
+ * @param arr $r the region key.
+ */
+function uri_ticks_activity_graph_output( $r ) {
+
+	$activity = get_field( str_replace( '-', '_', $r ) . '_activity' );
+
+	$min = 0;
+	$option_min = get_option( 'uri_ticks_activity_default_min' );
+	if ( ! empty( $option_min ) ) {
+		$min = intval( $option_min );
+	}
+
+	$max = 4;
+	$option_max = get_option( 'uri_ticks_activity_default_max' );
+	if ( ! empty( $option_max ) ) {
+		$max = intval( $option_max );
+	}
+
+	$output = '<div class="uri-ticks-activity">';
+	$output .= '<div class="uri-ticks-activity-graph">';
+
+	$output .= '<div class="uri-ticks-activity-legend">';
+	$output .= '<div class="uri-ticks-activity-legend-upper">High</div>';
+	$output .= '<div class="uri-ticks-activity-legend-lower">Low</div>';
+	$output .= '</div>';
+
+	foreach ( $activity as $m => $v ) {
+
+		$p = max( 0, ( intval( $v ) - $min ) / ( $max - $min ) * 100 );
+
+		$output .= '<div class="uri-ticks-activity-column">';
+
+		$output .= '<div class="uri-ticks-activity-bar-wrapper">';
+		$output .= '<div class="uri-ticks-activity-bar" style="height:' . ( 100 - $p ) . '%" title="' . $v . '"></div>';
+		$output .= '</div>';
+
+		$output .= '<div class="uri-ticks-activity-label">' . ucfirst( substr( $m, 0, 3 ) ) . '</div>';
+
+		$output .= '</div>';
+
+	}
+
+	$output .= '</div>';
+	$output .= '</div>';
 
 	return $output;
 
