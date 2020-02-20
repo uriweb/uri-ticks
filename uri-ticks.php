@@ -87,11 +87,6 @@ include( URI_TICKS_DIR_PATH . '/inc/post-types.php' );
 include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
 
 /**
- * Get Ticks shortcode
- */
-include( URI_TICKS_DIR_PATH . '/inc/get-ticks.php' );
-
-/**
  * Tick Map shortcode
  */
 include( URI_TICKS_DIR_PATH . '/inc/tick-map.php' );
