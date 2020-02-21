@@ -46,7 +46,14 @@ function uri_ticks_shortcode_display_tick_phases( $atts, $content = null ) {
 add_shortcode( 'uri-display-tick-phases', 'uri_ticks_shortcode_display_tick_phases' );
 
 
+/**
+ * Get the tick phases
+ *
+ * @param str $s The category name to pull.
+ */
 function uri_ticks_get_the_phases( $s ) {
+
+	$the_parent_id = get_the_ID();
 
 	$args = array(
 		'post_type' => 'tick',
@@ -61,7 +68,7 @@ function uri_ticks_get_the_phases( $s ) {
 		$output .= '<ul>';
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			$output .= '<li>' . uri_ticks_phase_output() . '</li>';
+			$output .= '<li>' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
 		}
 		$output .= '</ul>';
 	} else {
@@ -74,7 +81,13 @@ function uri_ticks_get_the_phases( $s ) {
 
 }
 
-function uri_ticks_phase_output() {
+
+/**
+ * Build the tick phase output
+ *
+ * @param num $id The post ID.
+ */
+function uri_ticks_phase_output( $id ) {
 
 	$regions = uri_ticks_get_the_regions();
 
@@ -83,23 +96,26 @@ function uri_ticks_phase_output() {
 
 	foreach ( $regions as $r => $rname ) {
 
-		$output .= '<li class="phase-region-' . $r . '">';
-		$output .= '<h2>' . $rname . '</h2>';
+		if ( uri_ticks_has_abundance( $r, $id ) ) {
 
-		$output .= '<div class="uri-tick-activity-wrapper">';
-		$output .= '<h3>Activity</h3>';
-		$output .= uri_ticks_activity_graph_output( $r );
-		$output .= '</div>';
+			$output .= '<li class="phase-region-' . $r . '">';
+			$output .= '<h2>' . $rname . '</h2>';
 
-		$output .= '<div class="uri-tick-diseases-wrapper">';
-		$output .= '<h3>Known Diseases Transmitted</h3>';
-		$output .= '<div class="disease-list">';
-		$output .= uri_ticks_diseases_output( $r );
-		$output .= '</div>';
-		$output .= '</div>';
+			$output .= '<div class="uri-tick-activity-wrapper">';
+			$output .= '<h3>Activity</h3>';
+			$output .= uri_ticks_activity_graph_output( $r );
+			$output .= '</div>';
 
-		$output .= '</li>';
+			$output .= '<div class="uri-tick-diseases-wrapper">';
+			$output .= '<h3>Known Diseases Transmitted</h3>';
+			$output .= '<div class="disease-list">';
+			$output .= uri_ticks_diseases_output( $r );
+			$output .= '</div>';
+			$output .= '</div>';
 
+			$output .= '</li>';
+
+		}
 	}
 
 	$output .= '</ul>';
@@ -110,13 +126,15 @@ function uri_ticks_phase_output() {
 
 /**
  * Build the disease output
+ *
+ * @param str $r The region key.
  */
 function uri_ticks_diseases_output( $r ) {
 
 	$diseases = get_field( str_replace( '-', '_', $r ) . '_diseases' );
 
 	if ( ! $diseases ) {
-		return '<div class="results-label no-diseases">No known diseases in this region.</div>';
+		return '<div class="results-label no-diseases">No known diseases in this region at this time.</div>';
 	}
 
 	$output .= '<ul class="uri-tick-diseases">';
@@ -142,6 +160,16 @@ function uri_ticks_diseases_output( $r ) {
 function uri_ticks_activity_graph_output( $r ) {
 
 	$activity = get_field( str_replace( '-', '_', $r ) . '_activity' );
+
+	$sum = 0;
+	foreach ( $activity as $m => $v ) {
+		$sum += intval( $v );
+	}
+
+	if ( 0 == $sum ) {
+		$output = '<div class="results-label no-activity">No activity data for this region at this time.</div>';
+		return $output;
+	}
 
 	$min = 0;
 	$option_min = get_option( 'uri_ticks_activity_default_min' );
@@ -183,5 +211,27 @@ function uri_ticks_activity_graph_output( $r ) {
 	$output .= '</div>';
 
 	return $output;
+
+}
+
+
+/**
+ * Return whether the species has abunance in the region
+ *
+ * @param str $r The region key.
+ * @param num $id The post id.
+ *
+ * @return boolval
+ */
+function uri_ticks_has_abundance( $r, $id ) {
+
+	$has_abundance = false;
+	$abundance = get_field( str_replace( '-', '_', $r ) . '_abundance', $id );
+
+	if ( ! empty( $abundance ) || 0 != intval( $abundance ) || null != $abundance ) {
+		$has_abundance = true;
+	}
+
+	return $has_abundance;
 
 }
