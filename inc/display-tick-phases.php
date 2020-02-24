@@ -25,15 +25,14 @@ function uri_ticks_shortcode_display_tick_phases( $atts, $content = null ) {
 	?>
 
 	<div id="uri-tick-phases-wrapper" data-active-region="new-england">
+		<h1 class="title">Life Cycle Stages</h1>
 		<div class="map-container">
 			<?php include( URI_TICKS_DIR_PATH . '/i/us_states.svg' ); ?>
+			<div class="instructions">Select a region to see how seasonal activity and diseases carried by this tick change across the country.</div>
 		</div>
 		<div class="phases-container">
 			<div class="phases-wrapper">
-				<h2>Tick Phases</h2>
-				<div class="phases-list">
-					<?php echo uri_ticks_get_the_phases( $atts['species'] ); ?>
-				</div>
+				<?php echo uri_ticks_get_the_phases( $atts['species'] ); ?>
 			</div>
 		</div>
 	</div>
@@ -65,10 +64,10 @@ function uri_ticks_get_the_phases( $s ) {
 	$output = '';
 
 	if ( $the_query->have_posts() ) {
-		$output .= '<ul>';
+		$output .= '<ul class="phases-list">';
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			$output .= '<li>' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
+			$output .= '<li class="phase-item">' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
 		}
 		$output .= '</ul>';
 	} else {
@@ -91,15 +90,16 @@ function uri_ticks_phase_output( $id ) {
 
 	$regions = uri_ticks_get_the_regions();
 
-	$output = '<h1>' . get_the_title() . '</h1>';
+	$output = '<h1>' . implode( ', ', uri_ticks_return_cat_names( 'tags' ) ) . '</h1>';
+	$output .= uri_ticks_get_the_images();
 	$output .= '<ul class="phase-regions-list">';
 
 	foreach ( $regions as $r => $rname ) {
 
 		if ( uri_ticks_has_abundance( $r, $id ) ) {
 
-			$output .= '<li class="phase-region-' . $r . '">';
-			$output .= '<h2>' . $rname . '</h2>';
+			$output .= '<li class="phase-region phase-region-' . $r . '">';
+			$output .= '<h2>' . $rname . ' Region</h2>';
 
 			$output .= '<div class="uri-tick-activity-wrapper">';
 			$output .= '<h3>Activity</h3>';
@@ -233,5 +233,22 @@ function uri_ticks_has_abundance( $r, $id ) {
 	}
 
 	return $has_abundance;
+
+}
+
+function uri_ticks_get_the_images() {
+
+	$img = get_field( 'secondary_image' );
+
+	$output = '<div class="species-images">';
+	$output .= '<div class="main-image">' . get_the_post_thumbnail() . '<div class="img-caption">Top</div></div>';
+
+	if ( null !== $img ) {
+		$output .= '<div class="secondary-image"><img src="' . $img['url'] . '" alt="' . $img['alt'] . '" srcset="' . wp_get_attachment_image_srcset( $img['id'] ) . '" /><div class="img-caption">Bottom</div></div>';
+	}
+
+	$output .= '</div>';
+
+	return $output;
 
 }

@@ -2,10 +2,13 @@
 
 .uri-ticks-activity {
 
-  background: #eee;
-  padding: 1.5rem;
-  border-radius: .2rem;
   margin-bottom: 2rem;
+  padding: 1.5rem 1rem 2rem;
+  border-radius: .2rem;
+  background: #ddd;
+  font-family: "Hind", "Lato", "Arial", sans-serif;
+  font-size: .7rem;
+  font-weight: bold;
 
   h1 {
     font-size: 1.5rem;
@@ -31,8 +34,8 @@
     align-self: start;
     height: 90%;
     position: relative;
-    font-size: .5rem;
-    border-right: 1px solid #555;
+    border-right: 1px solid #aaa;
+    color: #555;
 
     .uri-ticks-activity-legend-upper {
       position: absolute;
@@ -50,81 +53,22 @@
 
   .uri-ticks-activity-bar-wrapper {
     height: 90%;
-    background: #bbb;
-    border-bottom: 1px solid #555;
+    width: 8px;
+    margin: 0 auto;
+    background: #FF615D;
+    border-bottom: 1px solid #FF615D;
     box-sizing: border-box;
   }
 
   .uri-ticks-activity-bar {
-    background: #eee;
+    background: #f3f3f3;
   }
 
   .uri-ticks-activity-label {
     position: relative;
     top: .7rem;
     text-align: center;
-    font-size: .65rem;
     transform: rotate(-90deg);
-  }
-
-}
-
-@media screen and (min-width:600px) {
-
-  .uri-ticks-activity-graph {
-
-    grid-template-rows: 200px;
-
-    .uri-ticks-activity-legend {
-
-      font-size: .8rem;
-
-      .uri-ticks-activity-legend-upper {
-        right: 30%;
-      }
-
-      .uri-ticks-activity-legend-lower {
-        right: 30%;
-      }
-
-    }
-
-    .uri-ticks-activity-label {
-      height: 10%;
-      top: 0;
-      padding: .8rem 0 0;
-      font-size: .8rem;
-      transform: rotate(0);
-    }
-
-  }
-
-}
-
-@media screen and (min-width:800px) {
-
-  .uri-ticks-activity-graph {
-
-    grid-template-rows: 300px;
-
-    .uri-ticks-activity-legend {
-
-      font-size: .9rem;
-
-      .uri-ticks-activity-legend-upper {
-        right: 20%;
-      }
-
-      .uri-ticks-activity-legend-lower {
-        right: 20%;
-      }
-
-    }
-
-    .uri-ticks-activity-label {
-      font-size: 1rem;
-    }
-
   }
 
 }

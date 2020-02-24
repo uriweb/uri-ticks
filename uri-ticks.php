@@ -70,6 +70,32 @@ function uri_ticks_get_the_months() {
 	);
 }
 
+/**
+ * Return category or tag names
+ *
+ * @param str $type specify 'cats' or 'tags'.
+ */
+function uri_ticks_return_cat_names( $type = 'cats' ) {
+
+	switch ( $type ) {
+		case 'cats':
+			$cats = get_the_category();
+			break;
+		case 'tags':
+			$cats = get_the_tags();
+			break;
+	}
+
+	$names = array();
+
+	foreach ( $cats as $c ) {
+		array_push( $names, $c->name );
+	}
+
+	return $names;
+
+}
+
 
 /**
  * Settings

@@ -46,6 +46,60 @@ function uri_ticks_create_tick_post_type() {
 }
 add_action( 'init', 'uri_ticks_create_tick_post_type' );
 
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
+	acf_add_local_field_group(
+		array(
+			'key' => 'group_5e53e80c0cebb',
+			'title' => 'Images',
+			'fields' => array(
+				array(
+					'key' => 'field_5e53e818dd95b',
+					'label' => 'Secondary Image',
+					'name' => 'secondary_image',
+					'type' => 'image',
+					'instructions' => 'Upload a secondary image of the tick.  For example, if the featured image shows the dorsal view, upload a ventral view here.',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'library' => 'all',
+					'min_width' => '',
+					'min_height' => '',
+					'min_size' => '',
+					'max_width' => '',
+					'max_height' => '',
+					'max_size' => '',
+					'mime_types' => '',
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'tick',
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+		)
+		);
+
+endif;
+
 /**
  * Include custom fields
  */

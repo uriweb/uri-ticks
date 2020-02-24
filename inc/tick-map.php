@@ -164,8 +164,8 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 			$output .= '<div class="species-image">' . get_the_post_thumbnail() . '</div>';
 			$output .= '<div class="species-meta">';
 			$output .= uri_ticks_map_return_diseases( $r );
-			$output .= '<div class="species-category">' . implode( ', ', uri_ticks_map_return_cat_names() ) . '</div>';
-			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_map_return_cat_names( 'tags' ) ) . '</div>';
+			$output .= '<div class="species-category">' . implode( ', ', uri_ticks_return_cat_names() ) . '</div>';
+			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_return_cat_names( 'tags' ) ) . '</div>';
 			$output .= '<div class="species-activity-wrapper">';
 			$output .= '<div class="species-activity" title="Tick activity level: ' . $meta_val . '/' . $option_max . '"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
 			$output .= '</div>';
@@ -183,32 +183,6 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 	wp_reset_postdata();
 
 	return $output;
-
-}
-
-/**
- * Return category or tag names
- *
- * @param str $type specify 'cats' or 'tags'.
- */
-function uri_ticks_map_return_cat_names( $type = 'cats' ) {
-
-	switch ( $type ) {
-		case 'cats':
-			$cats = get_the_category();
-			break;
-		case 'tags':
-			$cats = get_the_tags();
-			break;
-	}
-
-	$names = array();
-
-	foreach ( $cats as $c ) {
-		array_push( $names, $c->name );
-	}
-
-	return $names;
 
 }
 
