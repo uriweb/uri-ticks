@@ -319,10 +319,12 @@
       }
 
       &::-moz-range-thumb {
-        width: 25px;
-        height: 25px;
+        width: 15px;
+        height: 15px;
         border-radius: 50%;
-        background: #4CAF50;
+        background: #FF615D;
+        border: none;
+        outline: none;
         cursor: pointer;
       }
 

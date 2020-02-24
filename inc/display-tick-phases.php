@@ -186,10 +186,12 @@ function uri_ticks_activity_graph_output( $r ) {
 	$output = '<div class="uri-ticks-activity">';
 	$output .= '<div class="uri-ticks-activity-graph">';
 
+	/*
 	$output .= '<div class="uri-ticks-activity-legend">';
 	$output .= '<div class="uri-ticks-activity-legend-upper">High</div>';
 	$output .= '<div class="uri-ticks-activity-legend-lower">Low</div>';
 	$output .= '</div>';
+	*/
 
 	foreach ( $activity as $m => $v ) {
 
@@ -201,7 +203,12 @@ function uri_ticks_activity_graph_output( $r ) {
 		$output .= '<div class="uri-ticks-activity-bar" style="height:' . ( 100 - $p ) . '%" title="' . $v . '"></div>';
 		$output .= '</div>';
 
-		$output .= '<div class="uri-ticks-activity-label">' . ucfirst( substr( $m, 0, 3 ) ) . '</div>';
+		$classes = '';
+		if ( strtolower( gmdate( 'F' ) ) == $m ) {
+			$classes = ' current';
+		}
+
+		$output .= '<div class="uri-ticks-activity-label' . $classes . '">' . ucfirst( substr( $m, 0, 3 ) ) . '</div>';
 
 		$output .= '</div>';
 

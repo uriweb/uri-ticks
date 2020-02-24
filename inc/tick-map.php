@@ -69,7 +69,7 @@ function uri_ticks_map_build_output( $atts ) {
 				<div class="species-list">
 					<div class="results-label instruction-label">
 						<p>Select a region to begin searching for ticks, and adjust the time of year to see how tick activity changes.</p>
-						<p>Results will appear here.</p>
+						<p>Results will appear here, sorted from most to least active.</p>
 					</div>
 					<?php
 					foreach ( $regions as $r => $rname ) :
