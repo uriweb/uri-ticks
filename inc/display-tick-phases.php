@@ -243,6 +243,10 @@ function uri_ticks_has_abundance( $r, $id ) {
 
 }
 
+
+/**
+ * Build the images output
+ */
 function uri_ticks_get_the_images() {
 
 	$img = get_field( 'secondary_image' );
