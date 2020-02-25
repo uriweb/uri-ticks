@@ -68,7 +68,7 @@ add_action( 'admin_init', 'uri_ticks_settings_init' );
  * @param arr $args has the following keys defined: title, id, callback.
  */
 function uri_ticks_activity_defaults_section_callback( $args ) {
-	echo '<p id="' . esc_attr( $args['id'] ) . '">' . esc_html_e( 'Default settings for the tick activity graph shortcode. Options set here will affect all graphs, but can be overridden on a per-graph basis using shortcode properties.', 'uri' ) . '</p>';
+	echo '<p id="' . esc_attr( $args['id'] ) . '">' . esc_html_e( 'Default settings for the tick activity graphs and indicators.', 'uri' ) . '</p>';
 }
 
 /**
@@ -84,7 +84,7 @@ function uri_ticks_activity_defaults_field_min_callback( $args ) {
 	// output the field
 	?>
 		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_min" id="uri-ticks-field-min" value="<?php print ( false !== $setting ) ? esc_attr( $setting ) : ''; ?>">
-		<p class="url-description"><?php esc_html_e( 'The Y-axis minimum value for activity (default is 0)', 'uri' ); ?></p>
+		<p class="url-description"><?php esc_html_e( 'The minimum value for activity (default is 0)', 'uri' ); ?></p>
 	<?php
 }
 
@@ -101,7 +101,7 @@ function uri_ticks_activity_defaults_field_max_callback( $args ) {
 	// output the field
 	?>
 		<input type="text" class="regular-text" aria-describedby="url-description" name="uri_ticks_activity_default_max" id="uri-ticks-field-max" value="<?php print ( false !== $setting ) ? esc_attr( $setting ) : ''; ?>">
-		<p class="url-description"><?php esc_html_e( 'The Y-axis maximum value for activity (default is dataset max)', 'uri' ); ?></p>
+		<p class="url-description"><?php esc_html_e( 'The maximum value for activity (default is 4)', 'uri' ); ?></p>
 	<?php
 }
 
