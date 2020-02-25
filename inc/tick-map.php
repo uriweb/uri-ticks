@@ -153,9 +153,19 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 	if ( $the_query->have_posts() ) {
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
+
 			$meta_val = get_field( $meta_key );
+			if ( empty( $meta_val ) ) {
+				$meta_val = 0;
+			}
+
 			$option_max = get_option( 'uri_ticks_activity_default_max' );
+			if ( empty( $option_max ) ) {
+				$option_max = 4;
+			}
+
 			$p = intval( $meta_val ) / intval( $option_max ) * 100;
+
 			$classes = '';
 			if ( strval( $atts['threshold'] ) == $meta_val ) {
 				$classes = 'inactive';
