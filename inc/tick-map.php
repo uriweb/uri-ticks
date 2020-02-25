@@ -161,7 +161,7 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 				$classes = 'inactive';
 			}
 			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '" data-activity-percent="' . $p . '" title="Learn more about this tick">';
-			$output .= '<div class="species-image">' . get_the_post_thumbnail() . '</div>';
+			$output .= '<div class="species-image">' . uri_ticks_get_the_thumbnail() . '</div>';
 			$output .= '<div class="species-meta">';
 			$output .= uri_ticks_map_return_diseases( $r );
 			$output .= '<div class="species-category">' . implode( ', ', uri_ticks_return_cat_names() ) . '</div>';
@@ -205,4 +205,16 @@ function uri_ticks_map_return_diseases( $r ) {
 
 		return $output;
 	}
+}
+
+function uri_ticks_get_the_thumbnail() {
+
+	$thumbnail = get_the_post_thumbnail();
+
+	if ( ! $thumbnail ) {
+		$thumbnail = '<img src="' . URI_TICKS_IMAGES . '/avatar.jpg" alt="generic tick image" />';
+	}
+
+	return $thumbnail;
+
 }

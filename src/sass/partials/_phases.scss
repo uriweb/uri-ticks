@@ -142,6 +142,11 @@
         border-radius: .2rem;
       }
 
+      .no-images {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+
     }
 
   }

@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'URI_TICKS_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'URI_TICKS_IMAGES', plugins_url( 'i', __FILE__ ) );
+
 
 /**
  * Include css and js

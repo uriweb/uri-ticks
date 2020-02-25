@@ -249,13 +249,24 @@ function uri_ticks_has_abundance( $r, $id ) {
  */
 function uri_ticks_get_the_images() {
 
+	$thumbnail = get_the_post_thumbnail();
 	$img = get_field( 'secondary_image' );
+	$has_images = false;
 
 	$output = '<div class="species-images">';
-	$output .= '<div class="main-image">' . get_the_post_thumbnail() . '<div class="img-caption">Top</div></div>';
 
-	if ( null !== $img ) {
+	if ( $thumbnail ) {
+		$output .= '<div class="main-image">' . $thumbnail . '<div class="img-caption">Top</div></div>';
+		$has_images = true;
+	}
+
+	if ( $img && null !== $img ) {
 		$output .= '<div class="secondary-image"><img src="' . $img['url'] . '" alt="' . $img['alt'] . '" srcset="' . wp_get_attachment_image_srcset( $img['id'] ) . '" /><div class="img-caption">Bottom</div></div>';
+		$has_images = true;
+	}
+
+	if ( ! $has_images ) {
+		$output .= '<div class="results-label no-images">There are no images of this tick available.</div>';
 	}
 
 	$output .= '</div>';
