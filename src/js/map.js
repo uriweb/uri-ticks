@@ -5,59 +5,55 @@
  */
 
 ( function() {
-
 	'use strict';
 
-  window.addEventListener( 'load', init, false );
+	window.addEventListener( 'load', init, false );
 
-  let data;
+	let data;
 
-  function init() {
-
+	function init() {
 		const wrapper = document.getElementById( 'uri-tick-map-wrapper' );
 		if ( null === wrapper ) {
 			return false;
 		}
 
-    data = {
-      map: document.getElementById( 'uri-tick-map' ),
-			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', ],
-      regions: {},
+		data = {
+			map: document.getElementById( 'uri-tick-map' ),
+			months: [ 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december' ],
+			regions: {},
 			slider: document.getElementById( 'uri-tick-map-timeframe' ),
 			species: {},
 			wrapper,
-    }
+		};
 
 		data.wrapper.setAttribute( 'data-active-region', '' );
-    const regions = data.map.querySelectorAll( '.region-group g' );
-    for ( let i = 0; i < regions.length; i++ ) {
-			const r = regions[i];
+		const regions = data.map.querySelectorAll( '.region-group g' );
+		for ( let i = 0; i < regions.length; i++ ) {
+			const r = regions[ i ];
 			setupRegion( r );
-      data.regions[r.getAttribute( 'id' ).replace( 'map-region-', '')] = r;
-    }
+			data.regions[ r.getAttribute( 'id' ).replace( 'map-region-', '' ) ] = r;
+		}
 
 		const species = data.wrapper.querySelectorAll( '.species-region' );
 		for ( let i = 0; i < species.length; i++ ) {
-
-			const s = species[i];
+			const s = species[ i ];
 			const activity = s.querySelectorAll( 'ul' );
 
 			const alist = {};
 			for ( let j = 0; j < activity.length; j++ ) {
-				const a = activity[j];
-				alist[a.getAttribute( 'class' ).replace( 'activity-', '' )] = a;
+				const a = activity[ j ];
+				alist[ a.getAttribute( 'class' ).replace( 'activity-', '' ) ] = a;
 			}
 
-			data.species[s.getAttribute( 'id' ).replace( 'species-region-', '' )] = {
+			data.species[ s.getAttribute( 'id' ).replace( 'species-region-', '' ) ] = {
 				el: s,
 				activity: alist,
 			};
-
-    }
+		}
 
 		const labels = data.wrapper.querySelectorAll( '.time-slider-label' );
 		for ( let i = 0; i < labels.length; i++ ) {
-			setupLabel( labels[i] );
+			setupLabel( labels[ i ] );
 		}
 
 		data.selectors = {
@@ -73,8 +69,7 @@
 			changeTimeframe( v );
 		}, false );
 		changeTimeframe( data.slider.value );
-
-  }
+	}
 
 	function setupRegion( r ) {
 		r.addEventListener( 'click', handleRegionClick.bind( null, r ), false );
@@ -96,9 +91,9 @@
 	}
 
 	function changeTimeframe( i ) {
-		const value = i * 1 - 1;
-		data.wrapper.setAttribute( 'data-active-month', data.months[value] );
-		data.selectors.month.value = data.months[value];
+		const value = ( i * 1 ) - 1;
+		data.wrapper.setAttribute( 'data-active-month', data.months[ value ] );
+		data.selectors.month.value = data.months[ value ];
 	}
 
 	function handleSelectRegion() {
@@ -112,5 +107,4 @@
 		data.slider.value = i;
 		changeTimeframe( i );
 	}
-
-})();
+}() );
