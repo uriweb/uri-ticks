@@ -207,6 +207,9 @@ function uri_ticks_map_return_diseases( $r ) {
 	}
 }
 
+/**
+ * Return the post thumbnail or default avatar if non existant
+ */
 function uri_ticks_get_the_thumbnail() {
 
 	$thumbnail = get_the_post_thumbnail();
