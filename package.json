@@ -1,7 +1,7 @@
 {
   "name": "uri-ticks",
   "description": "Creates custom posts, fields, and interaction for URI Tick Encounter data",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://www.uri.edu",
   "repository": "https://github.com/uriweb/uri-plugin-template",
   "docs": "https://github.com/uriweb/uri-plugin-template#readme",
