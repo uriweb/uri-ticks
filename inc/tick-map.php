@@ -178,6 +178,7 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_return_cat_names( 'tags' ) ) . '</div>';
 			$output .= '<div class="species-activity-wrapper">';
 			$output .= '<div class="species-activity" title="Tick activity level: ' . $meta_val . '/' . $option_max . '"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
+			$output .= '<div class="species-activity-label">Activity</div>';
 			$output .= '</div>';
 			$output .= '</div>';
 			$output .= '</a></li>';
