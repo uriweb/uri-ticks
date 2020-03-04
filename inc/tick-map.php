@@ -70,6 +70,9 @@ function uri_ticks_map_build_output( $atts ) {
 					<div class="results-label instruction-label">
 						<p>Select a region to begin searching for ticks, and adjust the time of year to see how tick activity changes.</p>
 						<p>Results will appear here, sorted from most to least active.</p>
+						<div class="instruction-legend">
+							<img src="<?php echo URI_TICKS_IMAGES; ?>/legend.png" alt="tick results legend" />
+						</div>
 					</div>
 					<?php
 					foreach ( $regions as $r => $rname ) :
@@ -153,14 +156,24 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 	if ( $the_query->have_posts() ) {
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
+
 			$meta_val = get_field( $meta_key );
-			$option_max = get_option( 'uri_ticks_activity_default_max' );
-			$p = intval( $meta_val ) / intval( $option_max ) * 100;
-			$classes = '';
-			if ( strval( $atts['threshold'] ) == $meta_val ) {
-				$classes = 'inactive';
+			if ( empty( $meta_val ) ) {
+				$meta_val = 0;
 			}
-			$output .= '<li><a href="' . get_the_permalink() . '" class="' . $classes . '" data-activity-percent="' . $p . '" title="Learn more about this tick">';
+
+			$option_max = get_option( 'uri_ticks_activity_default_max' );
+			if ( empty( $option_max ) ) {
+				$option_max = 4;
+			}
+
+			$p = intval( $meta_val ) / intval( $option_max ) * 100;
+
+			$classes = 'Activity';
+			if ( strval( $atts['threshold'] ) == $meta_val ) {
+				$classes = 'Inactive';
+			}
+			$output .= '<li><a href="' . get_the_permalink() . '" class="data-activity-percent="' . $p . '" title="Learn more about this tick">';
 			$output .= '<div class="species-image">' . uri_ticks_get_the_thumbnail() . '</div>';
 			$output .= '<div class="species-meta">';
 			$output .= uri_ticks_map_return_diseases( $r );
@@ -168,6 +181,7 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 			$output .= '<div class="species-tag">' . implode( ', ', uri_ticks_return_cat_names( 'tags' ) ) . '</div>';
 			$output .= '<div class="species-activity-wrapper">';
 			$output .= '<div class="species-activity" title="Tick activity level: ' . $meta_val . '/' . $option_max . '"><div class="species-activity-bar" style="width:' . $p . '%;"></div></div>';
+			$output .= '<div class="species-activity-label">' . $classes . '</div>';
 			$output .= '</div>';
 			$output .= '</div>';
 			$output .= '</a></li>';
@@ -207,6 +221,9 @@ function uri_ticks_map_return_diseases( $r ) {
 	}
 }
 
+/**
+ * Return the post thumbnail or default avatar if non existant
+ */
 function uri_ticks_get_the_thumbnail() {
 
 	$thumbnail = get_the_post_thumbnail();

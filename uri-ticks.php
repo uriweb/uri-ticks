@@ -3,7 +3,7 @@
  * Plugin Name: URI Ticks
  * Plugin URI: http://www.uri.edu
  * Description: Creates custom posts, fields, and interaction for URI Tick Encounter data
- * Version: 0.1.0
+ * Version: 1.0.0
  * Author: URI Web Communications
  * Author URI: https://today.uri.edu/
  *
@@ -19,16 +19,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'URI_TICKS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'URI_TICKS_IMAGES', plugins_url( 'i', __FILE__ ) );
 
+/**
+ * Returns version from package.json to be used for cache busting
+ *
+ * @return str
+ */
+function uri_ticks_cache_buster() {
+	static $cache_buster;
+	if ( empty( $cache_buster ) && function_exists( 'get_plugin_data' ) ) {
+		$values = get_plugin_data( URI_TICKS_DIR_PATH . 'uri-ticks.php', false );
+		$cache_buster = $values['Version'];
+	} else {
+		$cache_buster = gmdate( 'Ymd', strtotime( 'now' ) );
+	}
+	return $cache_buster;
+}
 
 /**
  * Include css and js
  */
 function uri_ticks_enqueues() {
 
-	wp_register_style( 'uri-ticks-css', plugins_url( '/css/style.built.css', __FILE__ ) );
+	wp_register_style( 'uri-ticks-css', plugins_url( '/css/style.built.css', __FILE__ ), array(), uri_ticks_cache_buster(), 'all' );
 	wp_enqueue_style( 'uri-ticks-css' );
 
-	wp_register_script( 'uri-ticks-js', plugins_url( '/js/script.built.js', __FILE__ ) );
+	wp_register_script( 'uri-ticks-js', plugins_url( '/js/script.built.js', __FILE__ ), array(), uri_ticks_cache_buster(), true );
 	wp_enqueue_script( 'uri-ticks-js' );
 
 }

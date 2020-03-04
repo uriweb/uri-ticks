@@ -31,9 +31,12 @@ env:
 services:
     - mysql
 
-# Disable XDebug
+# Configure some things before running
 before_install:
+    # Disable XDebug
     - phpenv config-rm xdebug.ini
+    # Install latest NPM (sometimes Travis-CI doesn't run the latest)
+    - npm install npm@latest -g
 
 # Use this to prepare your build for testing.
 before_script:
