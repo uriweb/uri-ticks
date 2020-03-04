@@ -1,0 +1,464 @@
+/* ======= MAP ======= */
+
+#uri-tick-map-wrapper {
+
+  display: block;
+
+  @each $r in $regions {
+
+    &[data-active-region=#{$r}]  {
+
+      .instruction-label {
+        display: none;
+      }
+
+      #uri-tick-map #map-region-#{$r} path {
+        fill: #FF615D;
+      }
+
+      @each $m in $months {
+
+        &[data-active-month=#{$m}] {
+          #species-region-#{$r},
+          #species-region-#{$r} .activity-#{$m} {
+            display: block;
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  @each $m in $months {
+    &[data-active-month=#{$m}] .time-slider-label[data-label-name=#{$m}] {
+      color: #FF615D;
+      font-weight: 700;
+    }
+  }
+
+  .map-container {
+    display: none;
+  }
+
+  .species-menu {
+    padding: 0 1rem 1rem;
+  }
+
+  .species-menu:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+
+  .species-menu-select-region {
+    float: left;
+  }
+
+  .species-menu-select-month {
+    float: right;
+  }
+
+  .species-wrapper {
+
+    background: #f3f3f3;
+    border-radius: .2rem;
+    border: 1px solid #eee;
+    max-width: 350px;
+
+    h2 {
+      margin: 0 0 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
+      background: #eee;
+    }
+
+    h3 {
+      display: none;
+      font-size: 1rem;
+      margin: 0 0 .4rem;
+      padding: 0 1rem;
+      float: left;
+    }
+
+    h4 {
+
+      display: none;
+      margin: 0 0 1.1rem;
+      font-size: 1rem;
+      float: right;
+      padding: 0 1rem;
+      font-weight: 400;
+
+      &:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+
+    }
+
+    .species-list {
+      //height: 400px;
+      //overflow-y: scroll;
+    }
+
+    .results-label {
+
+      font-family: "Hind", "Lato", "Arial", sans-serif;
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.5rem;
+      padding: 0 1rem;
+
+      p {
+        line-height: 1.5rem;
+      }
+
+    }
+
+    .instruction-label {
+      height: 400px;
+    }
+
+    .instruction-legend {
+
+      margin-bottom: 1rem;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+    }
+
+    .species-region {
+
+      display: none;
+
+      ul {
+
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        clear: both;
+        height: 370px;
+        overflow-y: scroll;
+
+        li {
+          margin-bottom: 0;
+        }
+
+        a {
+          display: flex;
+          width: 100%;
+          box-sizing: border-box;
+          overflow: hidden;
+          background: #fff;
+          transition: background .1s ease-in-out;
+        }
+
+        a:hover {
+
+          background: #FF615D;
+
+          .species-meta,
+          .species-tag {
+            color: #fff;
+          }
+
+          .species-meta {
+            border-bottom: 1px solid transparent;
+          }
+
+          .species-activity-bar {
+            background: #fff;
+          }
+
+          .species-activity-label {
+            color: rgba(255,255,255,.6);
+          }
+
+          .species-diseases span {
+            color: #fff;
+          }
+
+          #uri-tick-biohazard path {
+            fill: #fff;
+          }
+
+        }
+
+        a.inactive {
+          //opacity: .5;
+        }
+
+      }
+
+      .activity-container {
+        display: none;
+      }
+
+    }
+
+    .species-meta {
+      position: relative;
+      width: 75%;
+      padding: 4% 4% 4% 1%;
+      font-family: "Hind", "Lato", "Arial", sans-serif;
+      color: #333;
+      box-sizing: border-box;
+      border-bottom: 1px solid #eee;
+      transition: color .1s ease-in-out;
+    }
+
+    .species-category {
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    .species-tag {
+      color: #555;
+      margin-bottom: 5px;
+      font-size: .8rem;
+      line-height: .9rem;
+      transition: color .1s ease-in-out;
+    }
+
+    .species-image {
+
+      width: 25%;
+      padding: 4%;
+      box-sizing: border-box;
+
+      img {
+        display: block;
+        width: 100%;
+        border-radius: 50%;
+        border: 1px solid rgba(0,0,0,.1);
+        height: auto;
+      }
+
+    }
+
+    .species-activity-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .species-activity-label {
+      font-size: .6rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    .species-activity {
+      width: 100%;
+      height: 4px;
+      background: rgba(0,0,0,.1) ;
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 .5rem 1px 0;
+    }
+
+    .species-activity-bar {
+      height: 100%;
+      background: #FF615D;
+      transition: background .1s ease-in-out;
+    }
+
+    .species-diseases {
+
+      position: absolute;
+      right: 5%;
+      top: .8rem;
+      //background: #eee;
+      //padding: 2px 4px 0;
+      border-radius: 3px;
+
+      &:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      span {
+        display: block;
+        float: left;
+        padding-right: .2rem;
+        font-size: .8rem;
+        line-height: 17px;
+        font-weight: 700;
+        color: #FF615D;
+        transition: color .1s ease-in-out;
+      }
+
+      #uri-tick-biohazard {
+
+        display: block;
+        float: left;
+        width: 12px;
+        height: auto;
+        padding-top: 2px;
+
+        path {
+          fill: #FF615D;
+          transition: fill .1s ease-in-out;
+        }
+
+      }
+
+    }
+
+  }
+
+  .time-slider {
+
+    display: none;
+
+    #uri-tick-map-timeframe-label {
+      position: absolute;
+      left: -9999px;
+    }
+
+    #uri-tick-map-timeframe {
+
+      display: block;
+      width: 96.5%;
+      margin: 0 auto 1rem;
+      -webkit-appearance: none;
+      height: 1px;
+      //border-radius: 5px;
+      background: #ddd;
+      outline: none;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #FF615D;
+        cursor: pointer;
+      }
+
+      &::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #FF615D;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+    }
+
+    .time-slider-labels {
+
+      display: grid;
+      grid-template-columns: repeat( 12, 1fr );
+      text-align: center;
+      font-size: .7rem;
+      font-family: "Hind", "Lato", "Arial", sans-serif;
+      color: #555;
+
+      .time-slider-label:hover {
+        cursor: pointer;
+        color: #FF615D;
+        font-weight: 700;
+      }
+
+    }
+
+  }
+
+}
+
+#uri-tick-map {
+
+  path {
+    stroke: #fff;
+    stroke-width: 0.5px;
+    fill: #ddd;
+    transition: fill .1s ease-in-out;
+  }
+
+  .region-group {
+    g:hover path,
+    g:focus path {
+      fill: #999;
+      cursor: pointer;
+    }
+  }
+
+}
+
+@media screen and (min-width: 680px) {
+
+  #uri-tick-map-wrapper {
+
+    display: grid;
+    grid-template-columns: auto 285px;
+    grid-template-rows: auto max-content;
+    grid-column-gap: 2rem;
+    grid-template-areas:
+      "map species"
+      "timeline species";
+
+    .species-menu {
+      display: none;
+    }
+
+    .species-wrapper {
+      h3,
+      h4 {
+        display: block;
+      }
+    }
+
+    .map-container {
+      display: block;
+      grid-area: map;
+      align-self: center;
+    }
+
+    .species-container {
+      display: block;
+      grid-area: species;
+    }
+
+    .time-slider {
+      display: block;
+      grid-area: timeline;
+      padding: 1rem 1rem .2rem;
+      align-self: end;
+    }
+
+  }
+
+}
+
+@media screen and (min-width:800px) {
+
+  #uri-tick-map-wrapper {
+
+    .time-slider {
+
+      #uri-tick-map-timeframe {
+        width: 94%;
+      }
+
+      .time-slider-labels {
+        font-size: .9rem;
+      }
+
+    }
+
+  }
+
+}

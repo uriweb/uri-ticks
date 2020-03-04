@@ -1,48 +1,48 @@
-# URI Plugin Template
+# URI Ticks
 
-The URI Plugin Template repository is a base template for building WordPress plugins with gulp, PHP Code Sniffer, and Travis CI.
+Creates custom posts, fields, and interaction for URI Tick Encounter data.
 
-## How do I get set up?
+## How do I use it?
 
-There are a few things you need to do to get up and running:
+### Set defaults
 
-1. Download [master.zip](https://github.com/uriweb/uri-plugin-template/archive/master.zip) and unzip it
+URI Ticks creates a new settings page in WP Admin:  
+`Settings` --> `URI Ticks`
 
-2. Rename `.gitattributes-sample` to `.gitattributes`
+Set a minimum and maximum value for tick activity here.  Tick activity will be calculated on a 0-4 scale by default unless these values are specified.
 
-3. Rename the main plugin file [`uri-plugin-template.php`](https://github.com/uriweb/uri-plugin-template/blob/master/uri-plugin-template.php) and update the header to match your new plugin.
+### Shortcodes
 
-4. Update [`package.json`](https://github.com/uriweb/uri-plugin-template/blob/master/package.json) with your new plugin info.
+#### The map shortcode
 
-5. Update the `@package` tag in [`src/js/script.js`](https://github.com/uriweb/uri-plugin-template/blob/master/src/js/script.js).
+Display an interface for searching ticks by region and month using the `uri-tick-map` shortcode.
 
-6. Gulp runs a task to update the plugin version number from `package.json`, so you don't have to update it in two places.  However, gulp looks for the main plugin file by name in order to do this, so you'll need to update [`gulp.js`](https://github.com/uriweb/uri-plugin-template/blob/e7208805f9fedd83c29739de3307e91a0e64aaea/gulpfile.js#L86) to reflect the new name.
+##### Attributes:
 
-7. If you already have gulp and gulp-cli installed globally, install gulp and devDependencies in the project directory:
+`threshold` ( _number_ ) [ _optional_ ] &mdash; Set the threshold for inactivity.  Default is `0`.
 
-```shell
-$ cd <project_dir>
-$ npm install gulp
-$ npm install --save-dev
-```
+#### The tick phases shortcode
 
-Finally, don't forget to update this readme.
+Display life phase data for a given tick species using the `uri-display-tick-phases` shortcode.
 
-**For a more thorough install, and for PHP Code Sniffer support, head over to [SETUP.md](https://github.com/uriweb/uri-plugin-template/blob/master/SETUP.md).**
+##### Attributes:
 
+`species` ( _string_ ) [ required ] &mdash; Set the species slug.
 
 ## Plugin Details
 
-[![Master Build Status](https://travis-ci.org/uriweb/uri-plugin-template.svg?branch=master "Master build status")](https://travis-ci.org/uriweb/uri-plugin-template)
-[![CodeFactor](https://www.codefactor.io/repository/github/uriweb/uri-plugin-template/badge/master)](https://www.codefactor.io/repository/github/uriweb/uri-plugin-template/overview/master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/77712193bd8643f88fad1fbdc8a02c87)](https://www.codacy.com/app/uriweb/uri-plugin-template?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=uriweb/uri-plugin-template&amp;utm_campaign=Badge_Grade)
-[![devDependencies Status](https://david-dm.org/uriweb/uri-plugin-template/dev-status.svg)](https://david-dm.org/uriweb/uri-plugin-template?type=dev)
+[![GitHub release](https://img.shields.io/github/release/uriweb/uri-ticks.svg)](https://github.com/uriweb/uri-ticks/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/uriweb/uri-ticks.svg)](https://github.com/uriweb/uri-ticks/releases/latest)
+[![Master Build Status](https://travis-ci.com/uriweb/uri-ticks.svg?branch=master "Master build status")](https://travis-ci.com/uriweb/uri-ticks)
+[![CodeFactor](https://www.codefactor.io/repository/github/uriweb/uri-ticks/badge/master)](https://www.codefactor.io/repository/github/uriweb/uri-ticks/overview/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/398e3ec5228642018e450b6c1c572343)](https://www.codacy.com/gh/uriweb/uri-ticks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=uriweb/uri-ticks&amp;utm_campaign=Badge_Grade)
+[![devDependencies Status](https://david-dm.org/uriweb/uri-ticks/dev-status.svg)](https://david-dm.org/uriweb/uri-ticks?type=dev)
 
-URI Plugin Template  
-A base template for building WordPress plugins with gulp, PHP Code Sniffer, and Travis CI.
+URI Ticks  
+Creates custom posts, fields, and interaction for URI Tick Encounter data
 
 Contributors: Brandon Fuller  
 Tags: plugins  
 Requires at least: 4.0  
-Tested up to: 4.9  
-Stable tag: 0.1.0  
+Tested up to: 5.3  
+Stable tag: 1.0.0  

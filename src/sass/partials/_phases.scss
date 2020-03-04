@@ -1,0 +1,179 @@
+/* ======= PHASES ======= */
+
+
+#uri-tick-phases-wrapper {
+
+  font-family: "Hind", "Lato", "Arial", sans-serif;
+
+  @each $r in $regions {
+
+    &[data-active-region=#{$r}]  {
+
+      #uri-tick-map #map-region-#{$r} path {
+        fill: #FF615D;
+      }
+
+      .phases-list .phase-region-#{$r} {
+        display: block;
+      }
+
+    }
+
+  }
+
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid #ddd;
+
+  h1.title {
+    font-size: 2rem;
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .map-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .instructions {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    line-height: 1.2rem;
+    margin: 1rem auto 2rem;
+  }
+
+  .phases-list {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+
+    .phase-item {
+      background: #f3f3f3;
+      margin: 0;
+      border-radius: .2rem;
+      overflow: hidden;
+    }
+
+    ul,
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    .phase-regions-list {
+      padding: 1rem 1rem 0;
+    }
+
+    .phase-region {
+      display: none;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0;
+      padding: 1rem;
+      background: #ddd;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: .5rem;
+      font-size: 1.25rem;
+      color: #555;
+    }
+
+    .uri-tick-diseases li {
+      padding-left: 1rem;
+      border-left: 3px solid #ddd;
+    }
+
+    .disease-description {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .uri-tick-activity-wrapper,
+    .uri-tick-diseases-wrapper {
+      margin-bottom: 2rem;
+    }
+
+    .results-label {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .species-images {
+
+      display: grid;
+      grid-template-columns: repeat( 2, 1fr );
+      grid-column-gap: 1rem;
+      padding: 1rem;
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+
+      .img-caption {
+        font-size: .8rem;
+        font-weight: 700;
+        color: #555;
+        text-align: center;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: .2rem;
+      }
+
+      .no-images {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+
+    }
+
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+
+  #uri-tick-phases-wrapper {
+
+    .phases-list {
+      grid-template-columns: repeat( 2, 1fr );
+      grid-column-gap: 1rem;
+    }
+
+  }
+
+}
+
+@media screen and (min-width: 900px) {
+
+  #uri-tick-phases-wrapper {
+
+    .phases-list {
+      grid-template-columns: repeat( 3, 1fr );
+    }
+
+  }
+
+}

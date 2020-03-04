@@ -1,0 +1,81 @@
+/* ======= GRAPH ======= */
+
+.uri-ticks-activity {
+
+  margin-bottom: 2rem;
+  padding: 1.5rem 1rem 2rem;
+  border-radius: .2rem;
+  background: #fff;
+  font-family: "Hind", "Lato", "Arial", sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+}
+
+.uri-ticks-activity-graph {
+
+  display: grid;
+  grid-template-columns: repeat( 12, 1fr );
+  grid-template-rows: 150px;
+  grid-column-gap: 1%;
+  align-items: end;
+
+  .uri-ticks-activity-column {
+    height: 100%;
+    align-self: end;
+  }
+
+  .uri-ticks-activity-legend {
+
+    align-self: start;
+    height: 90%;
+    position: relative;
+    border-right: 1px solid #aaa;
+    color: #555;
+
+    .uri-ticks-activity-legend-upper {
+      position: absolute;
+      top: 0;
+      right: .5rem;
+    }
+
+    .uri-ticks-activity-legend-lower {
+      position: absolute;
+      bottom: 0;
+      right: .5rem;
+    }
+
+  }
+
+  .uri-ticks-activity-bar-wrapper {
+    height: 90%;
+    width: 8px;
+    margin: 0 auto;
+    background: #FF615D;
+    border-bottom: 1px solid #FF615D;
+    box-sizing: border-box;
+  }
+
+  .uri-ticks-activity-bar {
+    background: #f3f3f3;
+  }
+
+  .uri-ticks-activity-label {
+
+    position: relative;
+    top: .7rem;
+    text-align: center;
+    transform: rotate(-90deg);
+    color: #555;
+
+    &.current {
+      color: #FF615D;
+    }
+
+  }
+
+}

@@ -95,7 +95,7 @@ gulp.task('watcher', watcher);
 function watcher(done) {
 
 	// watch for CSS changes
-	gulp.watch('./src/sass/*.scss', styles);
+	gulp.watch('./src/sass/**/*.scss', styles);
 
     // watch for JS changes
 	gulp.watch('./src/js/*.js', scripts);
