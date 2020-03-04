@@ -2,6 +2,33 @@
 
 Creates custom posts, fields, and interaction for URI Tick Encounter data.
 
+## How do I use it?
+
+### Set defaults
+
+URI Ticks creates a new settings page in WP Admin:  
+`Settings` --> `URI Ticks`
+
+Set a minimum and maximum value for tick activity here.  Tick activity will be calculated on a 0-4 scale by default unless these values are specified.
+
+### Shortcodes
+
+#### The map shortcode
+
+Display an interface for searching ticks by region and month using the `uri-tick-map` shortcode.
+
+##### Attributes:
+
+`threshold` ( _number_ ) [ _optional_ ] &mdash; Set the threshold for inactivity.  Default is `0`.
+
+#### The tick phases shortcode
+
+Display life phase data for a given tick species using the `uri-display-tick-phases` shortcode.
+
+##### Attributes:
+
+`species` ( _string_ ) [ required ] &mdash; Set the species slug.
+
 ## Plugin Details
 
 [![Master Build Status](https://travis-ci.com/uriweb/uri-ticks.svg?branch=master "Master build status")](https://travis-ci.com/uriweb/uri-ticks)
