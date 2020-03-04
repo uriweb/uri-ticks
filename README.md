@@ -31,6 +31,8 @@ Display life phase data for a given tick species using the `uri-display-tick-pha
 
 ## Plugin Details
 
+[![GitHub release](https://img.shields.io/github/release/uriweb/uri-ticks.svg)](https://github.com/uriweb/uri-ticks/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/uriweb/uri-ticks.svg)](https://github.com/uriweb/uri-ticks/releases/latest)
 [![Master Build Status](https://travis-ci.com/uriweb/uri-ticks.svg?branch=master "Master build status")](https://travis-ci.com/uriweb/uri-ticks)
 [![CodeFactor](https://www.codefactor.io/repository/github/uriweb/uri-ticks/badge/master)](https://www.codefactor.io/repository/github/uriweb/uri-ticks/overview/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/398e3ec5228642018e450b6c1c572343)](https://www.codacy.com/gh/uriweb/uri-ticks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=uriweb/uri-ticks&amp;utm_campaign=Badge_Grade)
