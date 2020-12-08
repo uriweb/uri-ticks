@@ -59,10 +59,11 @@
     font-size: 1.1rem;
 
     .phase-item {
-      background: #f3f3f3;
+      background: #fff;
       margin: 0;
       border-radius: .2rem;
       overflow: hidden;
+      border: 1px solid #ddd;
     }
 
     ul,
@@ -81,10 +82,11 @@
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin-bottom: 0;
       padding: 1rem;
-      background: #ddd;
+      background: #eee;
+      text-align: center;
     }
 
     h2 {
@@ -126,8 +128,8 @@
       grid-template-columns: repeat( 2, 1fr );
       grid-column-gap: 1rem;
       padding: 1rem;
-      background: #eee;
-      border-bottom: 1px solid #ddd;
+      background: #fff;
+      border-bottom: 1px solid #eee;
 
       .img-caption {
         font-size: .8rem;
@@ -171,7 +173,7 @@
   #uri-tick-phases-wrapper {
 
     .phases-list {
-      grid-template-columns: repeat( 3, 1fr );
+      //grid-template-columns: repeat( 3, 1fr );
     }
 
   }
