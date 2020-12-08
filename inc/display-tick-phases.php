@@ -67,7 +67,9 @@ function uri_ticks_get_the_phases( $s ) {
 		$output .= '<ul class="phases-list">';
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			$output .= '<li class="phase-item">' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
+			if ( ! uri_ticks_get_field( 'uri_ticks_hide_on_species_page' ) ) {
+				$output .= '<li class="phase-item">' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
+			}
 		}
 		$output .= '</ul>';
 	} else {

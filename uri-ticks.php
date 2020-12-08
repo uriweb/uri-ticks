@@ -113,6 +113,20 @@ function uri_ticks_return_cat_names( $type = 'cats' ) {
 
 }
 
+/**
+ * Wrapper for Advanced Custom Fields get_field()
+ */
+function uri_ticks_get_field() {
+
+	$r = false;
+
+	if ( function_exists( 'get_field' ) ) {
+		$r = call_user_func_array( 'get_field', func_get_args() );
+	}
+
+	return $r;
+
+}
 
 /**
  * Settings
@@ -128,6 +142,11 @@ include( URI_TICKS_DIR_PATH . '/inc/post-types.php' );
  * Custom taxonomy
  */
 include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
+
+/**
+ * Layout options
+ */
+include( URI_TICKS_DIR_PATH . '/inc/layout-options.php' );
 
 /**
  * Tick Map shortcode
