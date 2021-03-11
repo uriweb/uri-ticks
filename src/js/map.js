@@ -1,7 +1,5 @@
 /**
  * MAP
- *
- * @package uri-ticks
  */
 
 ( function() {

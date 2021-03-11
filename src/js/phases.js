@@ -1,7 +1,5 @@
 /**
  * PHASES
- *
- * @package uri-ticks
  */
 
 ( function() {
