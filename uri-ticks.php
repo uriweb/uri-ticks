@@ -54,15 +54,15 @@ add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
  */
 function uri_ticks_get_the_regions() {
 	return array(
-		'en-central' => 'E/N Central',
-		'es-central' => 'E/S Central',
+		'en-central' => 'Northeast Central',
+		'es-central' => 'Southeast Central',
 		'mid-atlantic' => 'Mid Atlantic',
 		'mountain' => 'Mountain',
 		'new-england' => 'New England',
 		'pacific' => 'Pacific',
 		'south-atlantic' => 'South Atlantic',
-		'wn-central' => 'W/N Central',
-		'ws-central' => 'W/S Central',
+		'wn-central' => 'Northwest Central',
+		'ws-central' => 'Southwest Central',
 	);
 }
 
