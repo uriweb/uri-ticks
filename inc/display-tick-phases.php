@@ -67,7 +67,9 @@ function uri_ticks_get_the_phases( $s ) {
 		$output .= '<ul class="phases-list">';
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			$output .= '<li class="phase-item">' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
+			if ( ! uri_ticks_get_field( 'uri_ticks_hide_on_species_page' ) ) {
+				$output .= '<li class="phase-item">' . uri_ticks_phase_output( $the_parent_id ) . '</li>';
+			}
 		}
 		$output .= '</ul>';
 	} else {
@@ -102,7 +104,7 @@ function uri_ticks_phase_output( $id ) {
 			$output .= '<h2>' . $rname . ' Region</h2>';
 
 			$output .= '<div class="uri-tick-activity-wrapper">';
-			$output .= '<h3>Activity</h3>';
+			$output .= '<h3>Encounter Risk</h3>';
 			$output .= uri_ticks_activity_graph_output( $r );
 			$output .= '</div>';
 
@@ -167,7 +169,7 @@ function uri_ticks_activity_graph_output( $r ) {
 	}
 
 	if ( 0 == $sum ) {
-		$output = '<div class="results-label no-activity">No activity data for this region at this time.</div>';
+		$output = '<div class="results-label no-activity">No encounter data for this region at this time.</div>';
 		return $output;
 	}
 

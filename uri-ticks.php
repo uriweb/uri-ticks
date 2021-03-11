@@ -3,7 +3,7 @@
  * Plugin Name: URI Ticks
  * Plugin URI: http://www.uri.edu
  * Description: Creates custom posts, fields, and interaction for URI Tick Encounter data
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: URI Web Communications
  * Author URI: https://today.uri.edu/
  *
@@ -54,15 +54,15 @@ add_action( 'wp_enqueue_scripts', 'uri_ticks_enqueues' );
  */
 function uri_ticks_get_the_regions() {
 	return array(
-		'en-central' => 'E/N Central',
-		'es-central' => 'E/S Central',
+		'en-central' => 'Northeast Central',
+		'es-central' => 'Southeast Central',
 		'mid-atlantic' => 'Mid Atlantic',
 		'mountain' => 'Mountain',
 		'new-england' => 'New England',
 		'pacific' => 'Pacific',
 		'south-atlantic' => 'South Atlantic',
-		'wn-central' => 'W/N Central',
-		'ws-central' => 'W/S Central',
+		'wn-central' => 'Northwest Central',
+		'ws-central' => 'Southwest Central',
 	);
 }
 
@@ -113,6 +113,20 @@ function uri_ticks_return_cat_names( $type = 'cats' ) {
 
 }
 
+/**
+ * Wrapper for Advanced Custom Fields get_field()
+ */
+function uri_ticks_get_field() {
+
+	$r = false;
+
+	if ( function_exists( 'get_field' ) ) {
+		$r = call_user_func_array( 'get_field', func_get_args() );
+	}
+
+	return $r;
+
+}
 
 /**
  * Settings
@@ -128,6 +142,11 @@ include( URI_TICKS_DIR_PATH . '/inc/post-types.php' );
  * Custom taxonomy
  */
 include( URI_TICKS_DIR_PATH . '/inc/taxonomy.php' );
+
+/**
+ * Layout options
+ */
+include( URI_TICKS_DIR_PATH . '/inc/layout-options.php' );
 
 /**
  * Tick Map shortcode
