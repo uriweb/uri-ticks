@@ -105,9 +105,11 @@ function uri_ticks_return_cat_names( $type = 'cats' ) {
 
 	$names = array();
 
+	if (is_array($cats) || is_object($cats)) {
 	foreach ( $cats as $c ) {
 		array_push( $names, $c->name );
 	}
+}
 
 	return $names;
 
