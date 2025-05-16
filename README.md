@@ -44,5 +44,5 @@ Creates custom posts, fields, and interaction for URI Tick Encounter data
 Contributors: Brandon Fuller  
 Tags: plugins  
 Requires at least: 4.0  
-Tested up to: 5.6  
-Stable tag: 1.2.0  
+Tested up to: 6.8.1  
+Stable tag: 1.2.1  

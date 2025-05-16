@@ -3,7 +3,7 @@
  * Plugin Name: URI Ticks
  * Plugin URI: http://www.uri.edu
  * Description: Creates custom posts, fields, and interaction for URI Tick Encounter data
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: URI Web Communications
  * Author URI: https://today.uri.edu/
  *
