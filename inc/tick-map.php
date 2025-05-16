@@ -147,7 +147,7 @@ function uri_ticks_get_ticks_by_month( $atts, $r, $m ) {
 
 	// The Query
 	$the_query = new WP_Query( $args );
-
+ 	$output = null;
 	$output .= '<div class="activity-container activity-' . $m . '">';
 	$output .= '<h4 class="title">' . ucfirst( $m ) . '</h4>';
 	$output .= '<ul class="activity-list">';

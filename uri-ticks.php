@@ -3,7 +3,7 @@
  * Plugin Name: URI Ticks
  * Plugin URI: http://www.uri.edu
  * Description: Creates custom posts, fields, and interaction for URI Tick Encounter data
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: URI Web Communications
  * Author URI: https://today.uri.edu/
  *
@@ -105,9 +105,11 @@ function uri_ticks_return_cat_names( $type = 'cats' ) {
 
 	$names = array();
 
+	if (is_array($cats) || is_object($cats)) {
 	foreach ( $cats as $c ) {
 		array_push( $names, $c->name );
 	}
+}
 
 	return $names;
 
